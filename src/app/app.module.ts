@@ -8,6 +8,7 @@ import { AuthService, ScreenService, AppInfoService } from './shared/services';
 import { UnauthenticatedContentModule } from './unauthenticated-content';
 import { AppRoutingModule } from './app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     UnauthenticatedContentModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
-      // enabled: !isDevMode(),
+      enabled: !environment.production,//!isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
