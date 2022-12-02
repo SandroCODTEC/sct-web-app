@@ -1,0 +1,111 @@
+{
+  "configVersion": 1,
+  "timestamp": 1669941667276,
+  "index": "/sct-web-app/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/sct-web-app/favicon.ico",
+        "/sct-web-app/index.html",
+        "/sct-web-app/main.49f165cfdbf184f6.js",
+        "/sct-web-app/manifest.webmanifest",
+        "/sct-web-app/polyfills.8a57ee71b9ffce31.js",
+        "/sct-web-app/runtime.de9ca5fb4fc6e4a0.js",
+        "/sct-web-app/styles.2eb22b6ba9859143.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/sct-web-app/Roboto-300.0e01b6cd13b3857f.woff2",
+        "/sct-web-app/Roboto-300.603ca9a537b88428.woff",
+        "/sct-web-app/Roboto-300.6c0fea71d0542cdb.ttf",
+        "/sct-web-app/Roboto-400.475ba9e4e2d63456.woff2",
+        "/sct-web-app/Roboto-400.83f6acca8a27a93c.ttf",
+        "/sct-web-app/Roboto-400.bcefbfee882bc1cb.woff",
+        "/sct-web-app/Roboto-500.457532032ceb0168.woff2",
+        "/sct-web-app/Roboto-500.6e1ae5f0b324a0aa.woff",
+        "/sct-web-app/Roboto-500.de4cbf7a2334c617.ttf",
+        "/sct-web-app/Roboto-700.447291a88c067396.woff2",
+        "/sct-web-app/Roboto-700.f7aa49713d0a54c5.ttf",
+        "/sct-web-app/Roboto-700.fc482e6133cf5e26.woff",
+        "/sct-web-app/assets/icons/icon-128x128.png",
+        "/sct-web-app/assets/icons/icon-144x144.png",
+        "/sct-web-app/assets/icons/icon-152x152.png",
+        "/sct-web-app/assets/icons/icon-192x192.png",
+        "/sct-web-app/assets/icons/icon-384x384.png",
+        "/sct-web-app/assets/icons/icon-512x512.png",
+        "/sct-web-app/assets/icons/icon-72x72.png",
+        "/sct-web-app/assets/icons/icon-96x96.png",
+        "/sct-web-app/dxiconsmaterial.345004b3d2daa044.woff2",
+        "/sct-web-app/dxiconsmaterial.69bb0ff08e675b9a.woff",
+        "/sct-web-app/dxiconsmaterial.ae7487343696a16d.ttf"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/sct-web-app/Roboto-300.0e01b6cd13b3857f.woff2": "6b773b76e0a6708ee4040733cd0c83278543864a",
+    "/sct-web-app/Roboto-300.603ca9a537b88428.woff": "3ea2c95e21cc88d82bb111c99883484c64d657db",
+    "/sct-web-app/Roboto-300.6c0fea71d0542cdb.ttf": "73a2bb2d6e591a90ffb4ed118a3989fb17b54c7b",
+    "/sct-web-app/Roboto-400.475ba9e4e2d63456.woff2": "463a07f5c66bf14e6d9d6e0f6d5e3fd3cb11f4ec",
+    "/sct-web-app/Roboto-400.83f6acca8a27a93c.ttf": "dd1b1db13ff1f72138c134c62f38fef83749f36a",
+    "/sct-web-app/Roboto-400.bcefbfee882bc1cb.woff": "96eca9934dff83a12371dd54fc6c1bf29256815a",
+    "/sct-web-app/Roboto-500.457532032ceb0168.woff2": "e24a020df79c6ce3bcc4a6a33930f697b8e1d6b2",
+    "/sct-web-app/Roboto-500.6e1ae5f0b324a0aa.woff": "3caf9bcd149c12e6abfe03d309e931d4ca22d4a8",
+    "/sct-web-app/Roboto-500.de4cbf7a2334c617.ttf": "5f16f4d6dbb4a4f12d8ae96488ac209bb49762a5",
+    "/sct-web-app/Roboto-700.447291a88c067396.woff2": "977c5749fd06192dac5224811ed69e53a6b2b47d",
+    "/sct-web-app/Roboto-700.f7aa49713d0a54c5.ttf": "0ce37ced9c5fcac9bdc452a432c1258870ba4677",
+    "/sct-web-app/Roboto-700.fc482e6133cf5e26.woff": "e4774be50a91e83c4fdc647e27342d03a29fd215",
+    "/sct-web-app/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/sct-web-app/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/sct-web-app/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/sct-web-app/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/sct-web-app/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/sct-web-app/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/sct-web-app/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/sct-web-app/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/sct-web-app/dxiconsmaterial.345004b3d2daa044.woff2": "92ef5e705842f146eff64df49c570512196af994",
+    "/sct-web-app/dxiconsmaterial.69bb0ff08e675b9a.woff": "9af6aafc6db1a6f54a031d5b1b25dca191c6ab10",
+    "/sct-web-app/dxiconsmaterial.ae7487343696a16d.ttf": "c8079135961fe4cb5077bbdd9b7fb3f37918edef",
+    "/sct-web-app/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/sct-web-app/index.html": "b1c20cb82dcb5582e5e80dd4b621a4dfbca8d283",
+    "/sct-web-app/main.49f165cfdbf184f6.js": "fd86c05293658cda40c7e15e9191ef461071cc3a",
+    "/sct-web-app/manifest.webmanifest": "1017abe378b6706dcee080c14c46e71c2d8c374d",
+    "/sct-web-app/polyfills.8a57ee71b9ffce31.js": "59f27aa41616413711ec378ddadaf25c5e0d24fc",
+    "/sct-web-app/runtime.de9ca5fb4fc6e4a0.js": "80447d02da00740538997dc7e74eea7309a2fd88",
+    "/sct-web-app/styles.2eb22b6ba9859143.css": "b17da786838f87b4db3f539ebb6031f6562cc7b8"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
