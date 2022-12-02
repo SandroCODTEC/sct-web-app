@@ -6,8 +6,38 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { DxDataGridModule, DxFormModule } from 'devextreme-angular';
+import { ViewNameComponent } from './pages/view-name/view-name.component';
+import { CongregacaoComponent } from './pages/congregacao/congregacao.component';
+import { EventoComponent } from './pages/evento/evento.component';
+import { PassageiroComponent } from './pages/passageiro/passageiro.component';
+import { PassagemComponent } from './pages/passagem/passagem.component';
 
 const routes: Routes = [
+  {
+    path: 'pages/passagem',
+    component: PassagemComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'pages/passageiro',
+    component: PassageiroComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'pages/evento',
+    component: EventoComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'pages/congregacao',
+    component: CongregacaoComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'pages/view-name',
+    component: ViewNameComponent,
+    canActivate: [ AuthGuardService ]
+  },
   {
     path: 'tasks',
     component: TasksComponent,
@@ -56,7 +86,12 @@ const routes: Routes = [
   declarations: [
     HomeComponent,
     ProfileComponent,
-    TasksComponent
+    TasksComponent,
+    ViewNameComponent,
+    CongregacaoComponent,
+    EventoComponent,
+    PassageiroComponent,
+    PassagemComponent
   ]
 })
 export class AppRoutingModule { }
