@@ -5,3 +5,7 @@
   height: 100%;
   width: 100%;
 }
+
+::ng-deep .dx-layout-manager .dx-field-item:not(.dx-last-col) {
+  padding-right: 0px;
+}

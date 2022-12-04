@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import LocalStore from 'devextreme/data/local_store';
 import DataSource from 'devextreme/data/data_source';
+import ArrayStore from 'devextreme/data/array_store';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LocalDataService {
+export class DataService {
   constructor() {}
 
-  getDataStore(table: string, key: string = 'id'): LocalStore {
+  getLocalDataStore(table: string, key: string = 'Oid'): LocalStore {
     const store = new LocalStore({
       key: key,
       name: table,
@@ -17,16 +18,36 @@ export class LocalDataService {
     });
     return store;
   }
-  getDataSource(table: string, key: string = 'id'): DataSource {
-    const store = this.getDataStore(table, key);
+  getArrayDataStore(array: any, key: string = 'Oid'): LocalStore {
+    const store = new ArrayStore({
+      key: key,
+      data: array
+    });
+    return store;
+  }
+  getLocalDataSource(table: string, key: string = 'Oid'): DataSource {
+    const store = this.getLocalDataStore(table, key);
     var dataSource = new DataSource({
       store: store,
     });
     return dataSource;
   }
-  getActionLookUpDataSource(table: string, key: string = 'id') {
+  getArrayDataSource(array: any, key: string = 'Oid'): DataSource {
+    const store = this.getArrayDataStore(array, key);
+    var dataSource = new DataSource({
+      store: store,
+    });
+    return dataSource;
+  }
+  getLocalLookUpDataSource(table: string, key: string = 'Oid') {
     var dataSource = {
-      store: this.getDataStore(table, key),
+      store: this.getLocalDataStore(table, key),
+    };
+    return dataSource;
+  }
+  getArrayLookUpDataSource(array: any, key: string = 'Oid') {
+    var dataSource = {
+      store: this.getArrayDataStore(array, key),
     };
     return dataSource;
   }

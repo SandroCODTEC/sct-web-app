@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LocalDataService } from 'src/app/services/local-data.service';
+import { DataService } from 'src/app/services/local-data.service';
 
 @Component({
   selector: 'app-evento',
@@ -8,8 +8,8 @@ import { LocalDataService } from 'src/app/services/local-data.service';
 })
 export class EventoComponent implements OnInit {
   dataSource: any;
-  constructor(private localDataService: LocalDataService) {
-    this.dataSource = localDataService.getDataSource('Eventos');
+  constructor(private dataService: DataService) {
+    this.dataSource = dataService.getLocalDataSource('Eventos');
   }
 
   ngOnInit(): void {}

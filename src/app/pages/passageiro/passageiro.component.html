@@ -1,4 +1,201 @@
 <h2 class="content-block">Passageiro</h2>
-<div class="content-block">
-    <div class="dx-card responsive-paddings">Put your content here</div>
-</div>
+
+<dx-data-grid
+  [dataSource]="dataSource"
+  class="dx-card wide-card"
+  [showBorders]="false"
+  [focusedRowEnabled]="true"
+  [focusedRowIndex]="0"
+  [columnAutoWidth]="true"
+  [columnHidingEnabled]="true"
+  (onInitNewRow)="
+    $event.data.Ativo = true; $event.data.Dependentes = []; dependentes = null
+  "
+>
+  <dxo-search-panel
+    [visible]="true"
+    [width]="300"
+    placeholder="Pesquisar..."
+  ></dxo-search-panel>
+  <!-- <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+  <dxo-filter-row [visible]="false"></dxo-filter-row> -->
+
+  <dxo-editing
+    mode="popup"
+    [allowUpdating]="true"
+    [allowDeleting]="true"
+    [allowAdding]="true"
+    [useIcons]="true"
+  >
+    <dxo-popup
+      [showTitle]="true"
+      title="Dados do Passageiro"
+      [fullScreen]="true"
+    >
+    </dxo-popup>
+    <dxo-form
+      id="form"
+      labelLocation="top"
+      colCount="6"
+      [showValidationSummary]="true"
+      labelLocation="left"
+      labelMode="floating"
+    >
+      <dxi-item dataField="Nome" [colSpan]="5"></dxi-item>
+      <dxi-item dataField="Ativo" [colSpan]="1"></dxi-item>
+      <dxi-item dataField="TipoDocumento" [colSpan]="2"></dxi-item>
+      <dxi-item dataField="Documento" [colSpan]="2"></dxi-item>
+      <dxi-item dataField="Celular" [colSpan]="2"></dxi-item>
+      <dxi-item
+        itemType="group"
+        [colSpan]="6"
+        [colCount]="1"
+        caption="Dependentes"
+      >
+        <dxi-item dataField="Dependentes" [colSpan]="1"></dxi-item>
+      </dxi-item>
+    </dxo-form>
+  </dxo-editing>
+
+  <dxi-column dataField="Nome" caption="Nome do Passageiro" dataType="string">
+    <dxi-validation-rule
+      type="required"
+      message="O campo 'Nome do Passageiro' é obrigatório!"
+    ></dxi-validation-rule>
+    <dxi-validation-rule
+      type="stringLength"
+      [min]="2"
+      [max]="100"
+      message="Informe no máximo 100 caracteres!"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+  <dxi-column
+    dataField="TipoDocumento"
+    caption="Tipo de Documento"
+    dataType="string"
+  >
+    <dxo-lookup
+      [dataSource]="tipos"
+      valueExpr="Value"
+      displayExpr="Text"
+    ></dxo-lookup>
+    <dxi-validation-rule
+      type="required"
+      message="O campo 'Tipo de Documento' é obrigatório!"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+  <dxi-column dataField="Documento" caption="Documento" dataType="string">
+    <dxi-validation-rule
+      type="required"
+      message="O campo 'Documento' é obrigatório!"
+    ></dxi-validation-rule>
+    <dxi-validation-rule
+      type="stringLength"
+      [min]="2"
+      [max]="100"
+      message="Informe no máximo 100 caracteres!"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+  <dxi-column
+    dataField="Celular"
+    caption="Celular"
+    dataType="string"
+    [visible]="false"
+    [editorOptions]="{ mask: '(00) 00000-0000' }"
+    [allowFiltering]="false"
+  >
+  </dxi-column>
+
+  <dxi-column
+    dataField="Ativo"
+    caption="Ativo"
+    dataType="boolean"
+    [editorOptions]="{ iconSize: 40 }"
+    trueText="Sim"
+    falseText="Não"
+    [width]="80"
+  >
+  </dxi-column>
+
+  <dxi-column
+    dataField="Dependentes"
+    editCellTemplate="listDependentes"
+    [visible]="false"
+    [allowFiltering]="false"
+  >
+    <dxo-form-item
+      ><dxo-label text=" " [showColon]="false"></dxo-label
+    ></dxo-form-item>
+  </dxi-column>
+  <div *dxTemplate="let passageiro of 'listDependentes'">
+    <dx-data-grid
+      class="dx-card wide-card"
+      [dataSource]="getDependentes(passageiro.data.Oid)"
+      [showBorders]="false"
+      [focusedRowEnabled]="true"
+      [focusedRowIndex]="0"
+      [columnAutoWidth]="true"
+      [columnHidingEnabled]="true"
+      (onInitNewRow)="$event.data.Passageiro = { Oid: passageiro.data.Oid }"
+    >
+      <dxo-editing
+        mode="bath"
+        [allowUpdating]="true"
+        [allowDeleting]="true"
+        [allowAdding]="true"
+        [useIcons]="true"
+      >
+      </dxo-editing>
+      <dxi-column dataField="Passageiro.Oid" [visible]="false"></dxi-column>
+      <dxi-column
+        dataField="Nome"
+        caption="Nome do Dependente"
+        dataType="string"
+      >
+        <dxi-validation-rule
+          type="required"
+          message="O campo 'Nome do Dependente' é obrigatório!"
+        ></dxi-validation-rule>
+        <dxi-validation-rule
+          type="stringLength"
+          [min]="2"
+          [max]="100"
+          message="Informe no máximo 100 caracteres!"
+        ></dxi-validation-rule>
+      </dxi-column>
+
+      <dxi-column
+        dataField="TipoDocumento"
+        caption="Tipo de Documento"
+        dataType="string"
+      >
+        <dxo-lookup
+          [dataSource]="tipos"
+          valueExpr="Value"
+          displayExpr="Text"
+        ></dxo-lookup>
+        <dxi-validation-rule
+          type="required"
+          message="O campo 'Tipo de Documento' é obrigatório!"
+        ></dxi-validation-rule>
+      </dxi-column>
+
+      <dxi-column dataField="Documento" caption="Documento" dataType="string">
+        <dxi-validation-rule
+          type="required"
+          message="O campo 'Documento' é obrigatório!"
+        ></dxi-validation-rule>
+        <dxi-validation-rule
+          type="stringLength"
+          [min]="2"
+          [max]="100"
+          message="Informe no máximo 100 caracteres!"
+        ></dxi-validation-rule>
+      </dxi-column>
+    </dx-data-grid>
+  </div>
+</dx-data-grid>

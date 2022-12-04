@@ -8,16 +8,16 @@
   [focusedRowIndex]="0"
   [columnAutoWidth]="true"
   [columnHidingEnabled]="true"
-  (onInitNewRow)="$event.data.Ativo = true"
+  (onInitNewRow)="$event.data.Concluido = false"
 >
   <dxo-search-panel
     [visible]="true"
     [width]="300"
     placeholder="Pesquisar..."
   ></dxo-search-panel>
-  <dxo-paging [pageSize]="10"></dxo-paging>
+  <!-- <dxo-paging [pageSize]="10"></dxo-paging>
   <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
-  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-filter-row [visible]="false"></dxo-filter-row> -->
 
   <dxo-editing
     mode="popup"
@@ -26,6 +26,22 @@
     [allowAdding]="true"
     [useIcons]="true"
   >
+    <dxo-popup [showTitle]="true" title="Dados do Evento" [fullScreen]="true"> </dxo-popup>
+    <dxo-form
+      id="form"
+      labelLocation="top"
+      colCount="6"
+      [showValidationSummary]="true"
+      labelLocation="left"
+      labelMode="floating"
+    >
+      <dxi-item dataField="Descricao" [colSpan]="5"></dxi-item>
+      <dxi-item dataField="Concluido" [colSpan]="1"></dxi-item>
+      <dxi-item dataField="Tema" [colSpan]="6"></dxi-item>
+      <dxi-item dataField="DataInicial" [colSpan]="2"></dxi-item>
+      <dxi-item dataField="DataFinal" [colSpan]="2"></dxi-item>
+      <dxi-item dataField="ValorPassagem" [colSpan]="2"></dxi-item>
+    </dxo-form>
   </dxo-editing>
 
   <dxi-column dataField="Descricao" caption="Descrição" dataType="string">
@@ -41,12 +57,69 @@
     ></dxi-validation-rule>
   </dxi-column>
 
+  <dxi-column dataField="Tema" caption="Tema" dataType="string">
+    <dxi-validation-rule
+      type="required"
+      message="O campo 'Tema' é obrigatório!"
+    ></dxi-validation-rule>
+    <dxi-validation-rule
+      type="stringLength"
+      [min]="2"
+      [max]="100"
+      message="Informe no máximo 100 caracteres!"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+  <dxi-column
+    dataField="DataInicial"
+    caption="Data Inicial"
+    dataType="date"
+    [visible]="false"
+    format="dd/MM/yyyy"
+  >
+    <dxi-validation-rule
+      type="required"
+      message="O campo 'Data Inicial' é obrigatório!"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+  <dxi-column
+    dataField="DataFinal"
+    caption="Data Final"
+    dataType="date"
+    [visible]="false"
+    format="dd/MM/yyyy"
+  >
+    <dxi-validation-rule
+      type="required"
+      message="O campo 'Data Final' é obrigatório!"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+  <dxi-column
+    visibleIndex="5"
+    dataField="ValorPassagem"
+    caption="Valor da Passagem"
+    dataType="number"
+    [allowEditing]="true"
+    [visible]="false"
+    format="#,##0.00"
+    [editorOptions]="{ format: '#,##0.00' }"
+    [width]="120"
+  >
+    <dxi-validation-rule
+      type="required"
+      message="O campo 'Valor da Passagem' é obrigatório!"
+    ></dxi-validation-rule>
+  </dxi-column>
+
   <dxi-column
     dataField="Concluido"
-    caption="Ativo"
-    dataType="boolean" [editorOptions]="{ iconSize: 40 }"
-    trueText="Ativo"
-    falseText="Inativo"
+    caption="Concluído"
+    dataType="boolean"
+    [editorOptions]="{ iconSize: 40 }"
+    trueText="Sim"
+    falseText="Não"
     [width]="80"
   >
   </dxi-column>

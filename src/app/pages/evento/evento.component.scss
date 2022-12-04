@@ -1,0 +1,15 @@
+@media (min-width: 668px) and (max-width: 1600px)
+{ 
+    deep .dx-overlay-content.dx-resizable
+    {
+        width: 70%!important;
+    }
+}
+
+@media (max-width: 667px)
+{ 
+    deep .dx-overlay-content.dx-resizable
+    {
+        width: 100%!important;
+    }
+}
