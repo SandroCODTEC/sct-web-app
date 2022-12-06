@@ -5,10 +5,13 @@ export class AppInfoService {
   constructor() {}
 
   public get title() {
-    return 'SCT';
+    return `SCT - ${this.currentVersion}`;
   }
 
   public get currentYear() {
     return new Date().getFullYear();
+  }
+  public get currentVersion() {
+    return "1.0.0";
   }
 }
