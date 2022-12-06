@@ -168,7 +168,7 @@
           labelMode="floating"
         >
           <dxi-item dataField="Nome" [colSpan]="6"></dxi-item>
-          <dxi-item dataField="TipoDocumento" [colSpan]="6"></dxi-item>
+          <dxi-item dataField="TipoDocumento" [colSpan]="3"></dxi-item>
           <dxi-item dataField="Documento" [colSpan]="3"></dxi-item>
         </dxo-form>
       </dxo-editing>
@@ -177,6 +177,7 @@
         dataField="Nome"
         caption="Nome do Dependente"
         dataType="string"
+        [visible]="false"
       >
         <dxi-validation-rule
           type="required"
@@ -194,6 +195,7 @@
         dataField="TipoDocumento"
         caption="Tipo de Documento"
         dataType="string"
+        [visible]="false"
       >
         <dxo-lookup
           [dataSource]="tipos"
@@ -206,7 +208,12 @@
         ></dxi-validation-rule>
       </dxi-column>
 
-      <dxi-column dataField="Documento" caption="Documento" dataType="string">
+      <dxi-column
+        dataField="Documento"
+        caption="Documento"
+        dataType="string"
+        [visible]="false"
+      >
         <dxi-validation-rule
           type="required"
           message="O campo 'Documento' é obrigatório!"

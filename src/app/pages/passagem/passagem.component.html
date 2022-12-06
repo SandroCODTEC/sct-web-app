@@ -3,7 +3,7 @@
   [dataSource]="eventos"
   valueExpr="Oid"
   displayExpr="Tema"
-  [value]="currentEvento"
+  [value]="passagemService.currentEvento"
   (onValueChanged)="eventoChanged($event)"
 ></dx-select-box>
 
@@ -86,9 +86,11 @@
   </dxi-column>
 
   <dxi-column dataField="Grupo.Oid" caption="Grupo de Viagem" [visible]="false">
-    <dxo-lookup valueExpr="Value" displayExpr="Text"
-      [dataSource]="grupos"
-      ></dxo-lookup>
+    <dxo-lookup
+      valueExpr="Value"
+      displayExpr="Text"
+      [dataSource]="passagemService.grupos"
+    ></dxo-lookup>
     <dxi-validation-rule
       type="required"
       message="O campo 'Grupo de Viagem' é obrigatório!"
