@@ -5,7 +5,7 @@ export class AppInfoService {
   constructor() {}
 
   public get title() {
-    return 'SCT - CONGREGAÇÃO';
+    return 'SCT';
   }
 
   public get currentYear() {

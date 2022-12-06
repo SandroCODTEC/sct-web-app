@@ -2,26 +2,47 @@ export const navigation = [
   {
     text: 'Home',
     path: '/home',
-    icon: 'home'
+    icon: 'home',
   },
   {
-    text: 'Congregacao',
+    text: 'Congregação',
     path: '/pages/congregacao',
-    icon: 'activefolder'
+    icon: 'preferences',
   },
   {
-    text: 'Evento',
+    text: 'Eventos',
     path: '/pages/evento',
-    icon: 'activefolder'
+    icon: 'splitcells',
   },
   {
-    text: 'Passageiro',
+    text: 'Passageiros',
     path: '/pages/passageiro',
-    icon: 'activefolder'
+    icon: 'group',
   },
   {
-    text: 'Passagem',
+    text: 'Passagens',
     path: '/pages/passagem',
-    icon: 'activefolder'
-  }
+    icon: 'card',
+  },
+  {
+    text: 'Sobre o Sistema',
+    icon: 'info',
+    items: [
+      {
+        text: 'Ajuda',
+        path: '/pages/help',
+        icon: 'help',
+      },
+      {
+        text: 'Termos de Uso',
+        path: '/pages/terms',
+        icon: 'textdocument',
+      },
+      {
+        text: 'Política de Privacidade',
+        path: '/pages/privicy',
+        icon: 'key',
+      }
+    ]
+  },
 ];

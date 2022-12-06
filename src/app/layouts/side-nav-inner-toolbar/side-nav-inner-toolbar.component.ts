@@ -1,22 +1,34 @@
 import { Component, OnInit, NgModule, Input, ViewChild } from '@angular/core';
-import { SideNavigationMenuModule, HeaderModule } from '../../shared/components';
+import {
+  SideNavigationMenuModule,
+  HeaderModule,
+} from '../../shared/components';
 import { ScreenService } from '../../shared/services';
 import { ItemClickEvent as TreeViewItemClickEvent } from 'devextreme/ui/tree_view';
 import { ItemClickEvent as ToolbarItemClickEvent } from 'devextreme/ui/toolbar';
 import { DxDrawerModule } from 'devextreme-angular/ui/drawer';
-import { DxScrollViewModule, DxScrollViewComponent } from 'devextreme-angular/ui/scroll-view';
+import {
+  DxScrollViewModule,
+  DxScrollViewComponent,
+} from 'devextreme-angular/ui/scroll-view';
 import { DxToolbarModule } from 'devextreme-angular/ui/toolbar';
 import { CommonModule } from '@angular/common';
 
 import { Router, NavigationEnd } from '@angular/router';
+import { DxButtonModule } from 'devextreme-angular';
+import { UpdateService } from 'src/app/shared/services/update.service';
+import { SwUpdate } from '@angular/service-worker';
+import { interval } from 'rxjs';
+import notify from 'devextreme/ui/notify';
 
 @Component({
   selector: 'app-side-nav-inner-toolbar',
   templateUrl: './side-nav-inner-toolbar.component.html',
-  styleUrls: ['./side-nav-inner-toolbar.component.scss']
+  styleUrls: ['./side-nav-inner-toolbar.component.scss'],
 })
 export class SideNavInnerToolbarComponent implements OnInit {
-  @ViewChild(DxScrollViewComponent, { static: true }) scrollView!: DxScrollViewComponent;
+  @ViewChild(DxScrollViewComponent, { static: true })
+  scrollView!: DxScrollViewComponent;
   selectedRoute = '';
 
   menuOpened!: boolean;
@@ -30,12 +42,22 @@ export class SideNavInnerToolbarComponent implements OnInit {
   minMenuSize = 0;
   shaderEnabled = false;
 
-  constructor(private screen: ScreenService, private router: Router) { }
+  constructor(
+    private screen: ScreenService,
+    private router: Router,
+    private updates: SwUpdate
+  ) {
+    if (updates.isEnabled) {
+      interval(6 * 60 * 60).subscribe(() =>
+        updates.checkForUpdate().then(() => console.log('checking for updates'))
+      );
+    }
+  }
 
   ngOnInit() {
     this.menuOpened = this.screen.sizes['screen-large'];
 
-    this.router.events.subscribe(val => {
+    this.router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
         this.selectedRoute = val.urlAfterRedirects.split('?')[0];
       }
@@ -59,7 +81,7 @@ export class SideNavInnerToolbarComponent implements OnInit {
   toggleMenu = (e: ToolbarItemClickEvent) => {
     this.menuOpened = !this.menuOpened;
     e.event?.stopPropagation();
-  }
+  };
 
   get hideMenuAfterNavigation() {
     return this.menuMode === 'overlap' || this.temporaryMenuOpened;
@@ -97,11 +119,36 @@ export class SideNavInnerToolbarComponent implements OnInit {
       this.menuOpened = true;
     }
   }
+
+  public updateAvailable: boolean = false;
+
+  public checkForUpdates(): void {
+    this.updates.checkForUpdate().then((event) => {
+      //this.updateNow();
+      this.updateAvailable = event;
+    });
+  }
+
+  updateNow(): void {
+    console.log('updating to new version');
+    this.updates.activateUpdate().then(() => {
+      notify('Sistema atualizado com sucesso!', 'success', 10000);
+      window.location.reload();
+    });
+  }
 }
 
 @NgModule({
-  imports: [ SideNavigationMenuModule, DxDrawerModule, HeaderModule, DxToolbarModule, DxScrollViewModule, CommonModule ],
-  exports: [ SideNavInnerToolbarComponent ],
-  declarations: [ SideNavInnerToolbarComponent ]
+  imports: [
+    SideNavigationMenuModule,
+    DxDrawerModule,
+    HeaderModule,
+    DxToolbarModule,
+    DxScrollViewModule,
+    CommonModule,
+    DxButtonModule,
+  ],
+  exports: [SideNavInnerToolbarComponent],
+  declarations: [SideNavInnerToolbarComponent],
 })
-export class SideNavInnerToolbarModule { }
+export class SideNavInnerToolbarModule {}

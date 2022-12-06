@@ -25,8 +25,26 @@ import { CongregacaoComponent } from './pages/congregacao/congregacao.component'
 import { EventoComponent } from './pages/evento/evento.component';
 import { PassageiroComponent } from './pages/passageiro/passageiro.component';
 import { PassagemComponent } from './pages/passagem/passagem.component';
+import { HelpComponent } from './pages/help/help.component';
+import { PrivicyComponent } from './pages/privicy/privicy.component';
+import { TermsComponent } from './pages/terms/terms.component';
 
 const routes: Routes = [
+  {
+    path: 'pages/terms',
+    component: TermsComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'pages/privicy',
+    component: PrivicyComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'pages/help',
+    component: HelpComponent,
+    canActivate: [AuthGuardService],
+  },
   {
     path: 'pages/passagem',
     component: PassagemComponent,
@@ -97,7 +115,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, { useHash: true }),
     DxDataGridModule,
-    DxFormModule,  
+    DxFormModule,
     DxTemplateModule,
     DxMapModule,
     DxButtonModule,
@@ -116,6 +134,9 @@ const routes: Routes = [
     EventoComponent,
     PassageiroComponent,
     PassagemComponent,
+    HelpComponent,
+    PrivicyComponent,
+    TermsComponent,
   ],
 })
 export class AppRoutingModule {}

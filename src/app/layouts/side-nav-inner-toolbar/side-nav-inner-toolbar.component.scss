@@ -20,3 +20,19 @@
     padding-bottom: 10px;
   }
 }
+
+#main_content {
+  height: 300px;
+}
+
+.container-update {
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  padding: 10px;
+  position: relative;
+  background-color: yellow !important;
+}
+.container-update-title {
+  text-align: center;
+}

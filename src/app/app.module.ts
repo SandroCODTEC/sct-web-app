@@ -7,7 +7,7 @@ import { FooterModule, ResetPasswordFormModule, CreateAccountFormModule, ChangeP
 import { AuthService, ScreenService, AppInfoService } from './shared/services';
 import { UnauthenticatedContentModule } from './unauthenticated-content';
 import { AppRoutingModule } from './app-routing.module';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import { ServiceWorkerModule, SwUpdate } from '@angular/service-worker';
 import { environment } from 'src/environments/environment';
 
 @NgModule({
@@ -26,17 +26,19 @@ import { environment } from 'src/environments/environment';
     LoginFormModule,
     UnauthenticatedContentModule,
     AppRoutingModule,
-    environment.production ? ServiceWorkerModule.register('ngsw-worker.js', {
-      // enabled: !isDevMode(),
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    }) : []
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    // environment.production ? ServiceWorkerModule.register('ngsw-worker.js', {
+    //   // enabled: !isDevMode(),
+    //   // Register the ServiceWorker as soon as the application is stable
+    //   // or after 30 seconds (whichever comes first).
+    //   registrationStrategy: 'registerWhenStable:30000'
+    // }) : []
   ],
   providers: [
     AuthService,
     ScreenService,
-    AppInfoService
+    AppInfoService,
+    SwUpdate
   ],
   bootstrap: [AppComponent]
 })
