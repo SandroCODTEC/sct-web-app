@@ -7,8 +7,32 @@ import ArrayStore from 'devextreme/data/array_store';
   providedIn: 'root',
 })
 export class DataService {
-  constructor() {}
+  private storage: Storage;
+  constructor() {
+    this.storage = window.localStorage;
+  }
+  valueSet(key: string, value: string): boolean {
+    if (this.storage) {
+      this.storage.setItem(key, value);
+      return true;
+    }
+    return false;
+  }
 
+  valueGet(key: string): any {
+    if (this.storage) {
+      return this.storage.getItem(key);
+    }
+    return null;
+  }
+
+  valueRemove(key: string): boolean {
+    if (this.storage) {
+      this.storage.removeItem(key);
+      return true;
+    }
+    return false;
+  }
   getLocalDataStore(table: string, key: string = 'Oid'): LocalStore {
     const store = new LocalStore({
       key: key,

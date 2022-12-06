@@ -8,17 +8,13 @@
   [focusedRowIndex]="0"
   [columnAutoWidth]="true"
   [columnHidingEnabled]="true"
+  [showColumnHeaders]="false"
   (onInitNewRow)="$event.data.Concluido = false"
 >
   <dxo-search-panel
     [visible]="true"
-    [width]="300"
     placeholder="Pesquisar..."
   ></dxo-search-panel>
-  <!-- <dxo-paging [pageSize]="10"></dxo-paging>
-  <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
-  <dxo-filter-row [visible]="false"></dxo-filter-row> -->
-
   <dxo-editing
     mode="popup"
     [allowUpdating]="true"
@@ -35,12 +31,12 @@
       labelLocation="left"
       labelMode="floating"
     >
-      <dxi-item dataField="Descricao" [colSpan]="5"></dxi-item>
-      <dxi-item dataField="Concluido" [colSpan]="1"></dxi-item>
+      <dxi-item dataField="Descricao" [colSpan]="6"></dxi-item>
       <dxi-item dataField="Tema" [colSpan]="6"></dxi-item>
       <dxi-item dataField="DataInicial" [colSpan]="2"></dxi-item>
       <dxi-item dataField="DataFinal" [colSpan]="2"></dxi-item>
       <dxi-item dataField="ValorPassagem" [colSpan]="2"></dxi-item>
+      <dxi-item dataField="Concluido" [colSpan]="6"></dxi-item>
     </dxo-form>
   </dxo-editing>
 
@@ -121,6 +117,7 @@
     trueText="Sim"
     falseText="Não"
     [width]="80"
+    [visible]="false"
   >
   </dxi-column>
 </dx-data-grid>

@@ -8,18 +8,15 @@
   [focusedRowIndex]="0"
   [columnAutoWidth]="true"
   [columnHidingEnabled]="true"
+  [showColumnHeaders]="false"
   (onInitNewRow)="
     $event.data.Ativo = true; $event.data.Dependentes = []; dependentes = null
   "
 >
   <dxo-search-panel
     [visible]="true"
-    [width]="300"
     placeholder="Pesquisar..."
   ></dxo-search-panel>
-  <!-- <dxo-paging [pageSize]="10"></dxo-paging>
-  <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
-  <dxo-filter-row [visible]="false"></dxo-filter-row> -->
 
   <dxo-editing
     mode="popup"
@@ -42,11 +39,11 @@
       labelLocation="left"
       labelMode="floating"
     >
-      <dxi-item dataField="Nome" [colSpan]="5"></dxi-item>
-      <dxi-item dataField="Ativo" [colSpan]="1"></dxi-item>
+      <dxi-item dataField="Nome" [colSpan]="6"></dxi-item>
       <dxi-item dataField="TipoDocumento" [colSpan]="2"></dxi-item>
       <dxi-item dataField="Documento" [colSpan]="2"></dxi-item>
       <dxi-item dataField="Celular" [colSpan]="2"></dxi-item>
+      <dxi-item dataField="Ativo" [colSpan]="6"></dxi-item>
       <dxi-item
         itemType="group"
         [colSpan]="6"
@@ -75,6 +72,7 @@
     dataField="TipoDocumento"
     caption="Tipo de Documento"
     dataType="string"
+    [visible]="false"
   >
     <dxo-lookup
       [dataSource]="tipos"
@@ -87,7 +85,12 @@
     ></dxi-validation-rule>
   </dxi-column>
 
-  <dxi-column dataField="Documento" caption="Documento" dataType="string">
+  <dxi-column
+    dataField="Documento"
+    caption="Documento"
+    dataType="string"
+    [visible]="false"
+  >
     <dxi-validation-rule
       type="required"
       message="O campo 'Documento' é obrigatório!"
@@ -118,6 +121,7 @@
     trueText="Sim"
     falseText="Não"
     [width]="80"
+    [visible]="false"
   >
   </dxi-column>
 
@@ -143,12 +147,30 @@
       (onInitNewRow)="$event.data.Passageiro = { Oid: passageiro.data.Oid }"
     >
       <dxo-editing
-        mode="bath"
+        mode="popup"
         [allowUpdating]="true"
         [allowDeleting]="true"
         [allowAdding]="true"
         [useIcons]="true"
       >
+        <dxo-popup
+          [showTitle]="true"
+          title="Dados do Dependente"
+          [fullScreen]="true"
+        >
+        </dxo-popup>
+        <dxo-form
+          id="form"
+          labelLocation="top"
+          colCount="6"
+          [showValidationSummary]="true"
+          labelLocation="left"
+          labelMode="floating"
+        >
+          <dxi-item dataField="Nome" [colSpan]="6"></dxi-item>
+          <dxi-item dataField="TipoDocumento" [colSpan]="6"></dxi-item>
+          <dxi-item dataField="Documento" [colSpan]="3"></dxi-item>
+        </dxo-form>
       </dxo-editing>
       <dxi-column dataField="Passageiro.Oid" [visible]="false"></dxi-column>
       <dxi-column

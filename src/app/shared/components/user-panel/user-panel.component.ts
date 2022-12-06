@@ -4,13 +4,14 @@ import { CommonModule } from '@angular/common';
 import { DxListModule } from 'devextreme-angular/ui/list';
 import { DxContextMenuModule } from 'devextreme-angular/ui/context-menu';
 import { IUser } from '../../services/auth.service';
+import { DxSelectBoxModule } from 'devextreme-angular';
+import { DataService } from 'src/app/services/local-data.service';
 
 @Component({
   selector: 'app-user-panel',
   templateUrl: 'user-panel.component.html',
-  styleUrls: ['./user-panel.component.scss']
+  styleUrls: ['./user-panel.component.scss'],
 })
-
 export class UserPanelComponent {
   @Input()
   menuItems: any;
@@ -21,16 +22,14 @@ export class UserPanelComponent {
   @Input()
   user!: IUser | null;
 
-  constructor() {}
+  eventos: any;
+  constructor(private dataService: DataService) {
+  }
 }
 
 @NgModule({
-  imports: [
-    DxListModule,
-    DxContextMenuModule,
-    CommonModule
-  ],
-  declarations: [ UserPanelComponent ],
-  exports: [ UserPanelComponent ]
+  imports: [DxListModule, DxContextMenuModule, DxSelectBoxModule, CommonModule],
+  declarations: [UserPanelComponent],
+  exports: [UserPanelComponent],
 })
-export class UserPanelModule { }
+export class UserPanelModule {}

@@ -11,9 +11,14 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import {
+  DxButtonModule,
   DxDataGridModule,
   DxFormModule,
   DxMapModule,
+  DxPopupModule,
+  DxSelectBoxModule,
+  DxTagBoxModule,
+  DxTemplateModule,
 } from 'devextreme-angular';
 import { ViewNameComponent } from './pages/view-name/view-name.component';
 import { CongregacaoComponent } from './pages/congregacao/congregacao.component';
@@ -92,8 +97,13 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, { useHash: true }),
     DxDataGridModule,
-    DxFormModule,
+    DxFormModule,  
+    DxTemplateModule,
     DxMapModule,
+    DxButtonModule,
+    DxPopupModule,
+    DxTagBoxModule,
+    DxSelectBoxModule,
   ],
   providers: [AuthGuardService],
   exports: [RouterModule],

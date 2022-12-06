@@ -5,25 +5,6 @@ export const navigation = [
     icon: 'home'
   },
   {
-    text: 'Examples',
-    icon: 'folder',
-    items: [
-      {
-        text: 'Profile',
-        path: '/profile'
-      },
-      {
-        text: 'Tasks',
-        path: '/tasks'
-      }
-    ]
-  },
-  {
-    text: 'View Name',
-    path: '/pages/view-name',
-    icon: 'activefolder'
-  },
-  {
     text: 'Congregacao',
     path: '/pages/congregacao',
     icon: 'activefolder'

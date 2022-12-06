@@ -1,4 +1,4 @@
-<h2 class="content-block">Dados da Minha Congregação</h2>
+<h2 class="content-block">Minha Congregação</h2>
 <div class="content-block">
   <form (submit)="onFormSubmit($event)">
     <dx-form
@@ -100,239 +100,266 @@
         [colSpan]="6"
       >
       </dxi-item>
-      <dxi-item itemType="group" caption="Locais de Saída" [colSpan]="6">
-        <dx-data-grid
-          [dataSource]="saidas"
-          class="dx-card wide-card"
-          [showBorders]="false"
-          [focusedRowEnabled]="true"
-          [focusedRowIndex]="0"
-          [columnAutoWidth]="true"
-          [columnHidingEnabled]="true"
-          (onEditingStart)="saidaMarker = undefined"
-          (onInitNewRow)="
-            $event.data.Parada = markers.length + 1;
-            $event.data.Latitude = 0;
-            $event.data.Longitude = 0;
-            saidaMarker = undefined
-          "
-          (onSaved)="realodSaida()"
-        >
-          <dxo-editing
-            mode="popup"
-            [allowUpdating]="true"
-            [allowDeleting]="true"
-            [allowAdding]="true"
-            [useIcons]="true"
-          >
-            <dxo-popup
-              [showTitle]="true"
-              title="Dados do Local de Saída"
-              [fullScreen]="true"
-            >
-            </dxo-popup>
-            <dxo-form
-              id="form"
-              labelLocation="top"
-              colCount="6"
-              [showValidationSummary]="true"
-              labelLocation="left"
-              labelMode="floating"
-            >
-              <dxi-item
-                itemType="group"
-                caption="Dados da Partida"
-                colCount="6"
-                [colSpan]="6"
-              >
-                <dxi-item dataField="Parada" [colSpan]="3"></dxi-item>
-                <dxi-item dataField="Horario" [colSpan]="3"></dxi-item
-              ></dxi-item>
-              <dxi-item
-                itemType="group"
-                caption="Endereço do Local"
-                colCount="6"
-                [colSpan]="6"
-              >
-                <dxi-item dataField="Logradouro" [colSpan]="3"></dxi-item>
-                <dxi-item dataField="Numero" [colSpan]="1"></dxi-item>
-                <dxi-item dataField="Complemento" [colSpan]="2"></dxi-item>
-                <dxi-item dataField="Bairro" [colSpan]="3"></dxi-item>
-                <dxi-item dataField="Cidade" [colSpan]="2"></dxi-item>
-                <dxi-item dataField="UF" [colSpan]="1"></dxi-item>
-              </dxi-item>
-              <dxi-item
-                itemType="group"
-                caption="Localização"
-                colCount="6"
-                [colSpan]="6"
-              >
-                <dxi-item dataField="Latitude" [colSpan]="6"></dxi-item>
-                <!-- <dxi-item dataField="Longitude" [colSpan]="3"></dxi-item> -->
-              </dxi-item>
-            </dxo-form>
-          </dxo-editing>
-          <dxi-column dataField="Parada" dataType="number">
-            <dxi-validation-rule
-              type="required"
-              message="O campo 'Ordem da Partida' é obrigatório!"
-            ></dxi-validation-rule>
-          </dxi-column>
-          <dxi-column
-            dataField="Horario"
-            caption="Horário"
-            dataType="datetime"
-            [editorOptions]="{ type: 'time', pickerType: 'rollers' }"
-            format="HH:mm"
-          >
-            <dxi-validation-rule
-              type="required"
-              message="O campo 'Horário' é obrigatório!"
-            ></dxi-validation-rule>
-          </dxi-column>
-
-          <dxi-column
-            dataField="Logradouro"
-            caption="Logradouro"
-            dataType="string"
-          >
-            <dxi-validation-rule
-              type="required"
-              message="O campo 'Lograoudro' é obrigatório!"
-            ></dxi-validation-rule>
-            <dxi-validation-rule
-              type="stringLength"
-              [min]="2"
-              [max]="100"
-              message="Informe no máximo 100 caracteres!"
-            ></dxi-validation-rule>
-          </dxi-column>
-
-          <dxi-column dataField="Numero" caption="Número" dataType="string">
-            <dxi-validation-rule
-              type="required"
-              message="O campo 'Número' é obrigatório!"
-            ></dxi-validation-rule>
-            <dxi-validation-rule
-              type="stringLength"
-              [min]="2"
-              [max]="100"
-              message="Informe no máximo 100 caracteres!"
-            ></dxi-validation-rule>
-          </dxi-column>
-
-          <dxi-column
-            dataField="Complemento"
-            caption="Complemento"
-            dataType="string"
-            [visible]="false"
-          >
-            <dxi-validation-rule
-              type="required"
-              message="O campo 'Complemento' é obrigatório!"
-            ></dxi-validation-rule>
-            <dxi-validation-rule
-              type="stringLength"
-              [min]="2"
-              [max]="100"
-              message="Informe no máximo 100 caracteres!"
-            ></dxi-validation-rule>
-          </dxi-column>
-
-          <dxi-column dataField="Bairro" caption="Bairro" dataType="string">
-            <dxi-validation-rule
-              type="stringLength"
-              [min]="2"
-              [max]="100"
-              message="Informe no máximo 100 caracteres!"
-            ></dxi-validation-rule>
-          </dxi-column>
-
-          <dxi-column
-            dataField="Cidade"
-            caption="Cidade"
-            dataType="string"
-            [visible]="false"
-          >
-            <dxi-validation-rule
-              type="required"
-              message="O campo 'Cidade' é obrigatório!"
-            ></dxi-validation-rule>
-            <dxi-validation-rule
-              type="stringLength"
-              [min]="2"
-              [max]="100"
-              message="Informe no máximo 100 caracteres!"
-            ></dxi-validation-rule>
-          </dxi-column>
-
-          <dxi-column
-            dataField="UF"
-            caption="UF"
-            dataType="string"
-            [visible]="false"
-          >
-            <dxi-validation-rule
-              type="required"
-              message="O campo 'UF' é obrigatório!"
-            ></dxi-validation-rule>
-            <dxi-validation-rule
-              type="stringLength"
-              [min]="2"
-              [max]="2"
-              message="Informe no máximo 2 caracteres!"
-            ></dxi-validation-rule>
-          </dxi-column>
-
-          <dxi-column
-            visibleIndex="5"
-            dataField="Latitude"
-            caption="Latitude"
-            dataType="number"
-            [allowEditing]="true"
-            [visible]="false"
-            editCellTemplate="mapTemplate"
-          >
-            <!-- <dxi-validation-rule
-              type="required"
-              message="Por favor, selecione no mapa o local de saída!"
-            ></dxi-validation-rule> -->
-          </dxi-column>
-          <dxi-column
-            visibleIndex="5"
-            dataField="Longitude"
-            caption="Longitude"
-            dataType="number"
-            [allowEditing]="true"
-            [visible]="false"
-          >
-          </dxi-column>
-          <div *dxTemplate="let d of 'mapTemplate'">
-            <dx-map
-              class="dx-card wide-card"
-              [center]="mapOptions"
-              [zoom]="zoom"
-              provider="bing"
-              width="100%"
-              [height]="440"
-              [markers]="getSaidaMarker(d)"
-              (onClick)="mapOnClick($event, d)"
-            >
-            </dx-map>
-          </div>
-        </dx-data-grid>
-      </dxi-item>
     </dx-form>
   </form>
-  <dx-map
-    class="dx-card wide-card"
-    [center]="mapOptions"
-    [zoom]="18"
-    provider="bing"
-    width="100%"
-    [height]="440"
-    [markers]="markers"
-    [routes]="routes"
-  >
-  </dx-map>
 </div>
+<dx-data-grid
+  [dataSource]="saidas"
+  class="dx-card wide-card"
+  [showBorders]="false"
+  [focusedRowEnabled]="true"
+  [focusedRowIndex]="0"
+  [columnAutoWidth]="true"
+  [columnHidingEnabled]="true"
+  (onRowValidating)="rowValidating($event)"
+  (onEditingStart)="saidaMarker = undefined; saida = $event.data"
+  (onInitNewRow)="initNewRow($event)"
+  (onSaved)="realodSaida()"
+>
+  <dxo-editing
+    mode="popup"
+    [allowUpdating]="true"
+    [allowDeleting]="true"
+    [allowAdding]="true"
+    [useIcons]="true"
+  >
+    <dxo-popup
+      [showTitle]="true"
+      title="Dados do Local de Saída"
+      [fullScreen]="true"
+    >
+    </dxo-popup>
+    <dxo-form
+      id="form"
+      labelLocation="top"
+      colCount="6"
+      [showValidationSummary]="true"
+      labelLocation="left"
+      labelMode="floating"
+    >
+      <dxi-item
+        itemType="group"
+        caption="Dados da Partida"
+        colCount="6"
+        [colSpan]="6"
+      >
+        <dxi-item dataField="Parada" [colSpan]="3"></dxi-item>
+        <dxi-item dataField="Horario" [colSpan]="3"></dxi-item
+      ></dxi-item>
+      <dxi-item
+        itemType="group"
+        caption="Endereço do Local"
+        colCount="6"
+        [colSpan]="6"
+      >
+        <dxi-item dataField="Logradouro" [colSpan]="3"></dxi-item>
+        <dxi-item dataField="Numero" [colSpan]="1"></dxi-item>
+        <dxi-item dataField="Complemento" [colSpan]="2"></dxi-item>
+        <dxi-item dataField="Bairro" [colSpan]="3"></dxi-item>
+        <dxi-item dataField="Cidade" [colSpan]="2"></dxi-item>
+        <dxi-item dataField="UF" [colSpan]="1"></dxi-item>
+      </dxi-item>
+      <dxi-item
+        itemType="group"
+        caption="Localização"
+        colCount="6"
+        [colSpan]="6"
+      >
+        <dxi-item dataField="Latitude" [colSpan]="6"></dxi-item>
+        <!-- <dxi-item dataField="Longitude" [colSpan]="3"></dxi-item> -->
+      </dxi-item>
+    </dxo-form>
+  </dxo-editing>
+  <dxi-column dataField="Parada" dataType="number" [width]="30">
+    <dxi-validation-rule
+      type="required"
+      message="O campo 'Ordem da Partida' é obrigatório!"
+    ></dxi-validation-rule>
+  </dxi-column>
+  <dxi-column
+    dataField="Horario"
+    caption="Horário"
+    dataType="datetime"
+    [editorOptions]="{ type: 'time', pickerType: 'rollers' }"
+    format="HH:mm"
+    [width]="70"
+  >
+    <dxi-validation-rule
+      type="required"
+      message="O campo 'Horário' é obrigatório!"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+  <dxi-column dataField="Logradouro" caption="Logradouro" dataType="string">
+    <dxi-validation-rule
+      type="required"
+      message="O campo 'Lograoudro' é obrigatório!"
+    ></dxi-validation-rule>
+    <dxi-validation-rule
+      type="stringLength"
+      [min]="2"
+      [max]="100"
+      message="Informe no máximo 100 caracteres!"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+  <dxi-column
+    dataField="Numero"
+    caption="Número"
+    dataType="string"
+    [visible]="false"
+  >
+    <dxi-validation-rule
+      type="required"
+      message="O campo 'Número' é obrigatório!"
+    ></dxi-validation-rule>
+    <dxi-validation-rule
+      type="stringLength"
+      [min]="2"
+      [max]="100"
+      message="Informe no máximo 100 caracteres!"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+  <dxi-column
+    dataField="Complemento"
+    caption="Complemento"
+    dataType="string"
+    [visible]="false"
+  >
+    <dxi-validation-rule
+      type="required"
+      message="O campo 'Complemento' é obrigatório!"
+    ></dxi-validation-rule>
+    <dxi-validation-rule
+      type="stringLength"
+      [min]="2"
+      [max]="100"
+      message="Informe no máximo 100 caracteres!"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+  <dxi-column
+    dataField="Bairro"
+    caption="Bairro"
+    dataType="string"
+    [visible]="false"
+  >
+    <dxi-validation-rule
+      type="stringLength"
+      [min]="2"
+      [max]="100"
+      message="Informe no máximo 100 caracteres!"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+  <dxi-column
+    dataField="Cidade"
+    caption="Cidade"
+    dataType="string"
+    [visible]="false"
+  >
+    <dxi-validation-rule
+      type="required"
+      message="O campo 'Cidade' é obrigatório!"
+    ></dxi-validation-rule>
+    <dxi-validation-rule
+      type="stringLength"
+      [min]="2"
+      [max]="100"
+      message="Informe no máximo 100 caracteres!"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+  <dxi-column dataField="UF" caption="UF" dataType="string" [visible]="false">
+    <dxi-validation-rule
+      type="required"
+      message="O campo 'UF' é obrigatório!"
+    ></dxi-validation-rule>
+    <dxi-validation-rule
+      type="stringLength"
+      [min]="2"
+      [max]="2"
+      message="Informe no máximo 2 caracteres!"
+    ></dxi-validation-rule>
+  </dxi-column>
+
+  <dxi-column
+    visibleIndex="5"
+    dataField="Latitude"
+    caption="Latitude"
+    dataType="number"
+    [allowEditing]="true"
+    [visible]="false"
+    editCellTemplate="mapTemplate"
+  >
+  </dxi-column>
+  <dxi-column
+    visibleIndex="5"
+    dataField="Longitude"
+    caption="Longitude"
+    dataType="number"
+    [allowEditing]="true"
+    [visible]="false"
+  >
+  </dxi-column>
+  <div *dxTemplate="let d of 'mapTemplate'">
+    <dx-button
+      icon="map"
+      [text]="
+        'Latitude: ' + saida?.Latitude + ' Longitude: ' + saida?.Longitude
+      "
+      (onClick)="showMapSaida = true"
+    >
+    </dx-button>
+  </div>
+</dx-data-grid>
+<dx-map
+  class="dx-card wide-card"
+  [center]="mapOptions"
+  [zoom]="18"
+  provider="bing"
+  width="100%"
+  [height]="440"
+  [markers]="markers"
+  [routes]="routes"
+>
+</dx-map>
+<dx-popup
+  [showTitle]="true"
+  title="Selecione um local no mapa"
+  [dragEnabled]="false"
+  [hideOnOutsideClick]="true"
+  [showCloseButton]="false"
+  container=".dx-viewport"
+  [fullScreen]="true"
+  [(visible)]="showMapSaida"
+>
+  <dxi-toolbar-item
+    widget="dxButton"
+    toolbar="bottom"
+    location="before"
+    [options]="setLocalButtonOptions"
+  >
+  </dxi-toolbar-item>
+  <dxi-toolbar-item
+    widget="dxButton"
+    toolbar="bottom"
+    location="after"
+    [options]="closeButtonOptions"
+  >
+  </dxi-toolbar-item>
+  <div *dxTemplate="let data of 'content'">
+    <dx-map
+      class="dx-card wide-card"
+      [center]="mapOptions"
+      [zoom]="zoom"
+      provider="bing"
+      width="100%"
+      height="100%"
+      [markers]="getSaidaMarker()"
+      (onClick)="mapOnClick($event)"
+    >
+    </dx-map>
+  </div>
+</dx-popup>
