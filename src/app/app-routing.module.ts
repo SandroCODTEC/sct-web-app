@@ -12,6 +12,7 @@ import { TasksComponent } from './pages/tasks/tasks.component';
 import {
   DxButtonModule,
   DxDataGridModule,
+  DxFileUploaderModule,
   DxFormModule,
   DxMapModule,
   DxPopupModule,
@@ -90,6 +91,7 @@ const routes: Routes = [
     DxPopupModule,
     DxTagBoxModule,
     DxSelectBoxModule,
+    DxFileUploaderModule,
   ],
   providers: [AuthGuardService],
   exports: [RouterModule],

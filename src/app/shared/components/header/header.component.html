@@ -63,7 +63,7 @@
         icon: 'import',
         text: 'Restaurar',
         stylingMode: 'text',
-        onClick: backup
+        onClick: openDialog
       }"
     >
     </dxi-item>
@@ -74,9 +74,36 @@
         icon: 'upload',
         text: 'SCT',
         stylingMode: 'text',
-        onClick: backup
+        onClick: export
       }"
     >
     </dxi-item>
   </dx-toolbar>
 </header>
+
+<dx-popup
+  [showTitle]="true"
+  title="Restaurar dados do sistema"
+  [dragEnabled]="false"
+  [hideOnOutsideClick]="true"
+  [showCloseButton]="true"
+  container=".dx-viewport"
+  [fullScreen]="false"
+  [(visible)]="openFileDialog"
+  [width]="350"
+  [height]="200"
+>
+  <div *dxTemplate="let data of 'content'">
+    <dx-file-uploader
+      [visible]="true"
+      selectButtonText="Selecione o Arquivo..."
+      labelText=""
+      [allowedFileExtensions]="['.sct']"
+      uploadMode="instantly"
+      uploadUrl="/"
+      [showFileList]="false"
+      (valueChange)="restore($event)"
+    >
+    </dx-file-uploader>
+  </div>
+</dx-popup>
