@@ -51,18 +51,19 @@ export class AppDataService {
       'dx-data-localStore-Dependentes'
     );
     let passagensData: string[] = [];
-    const eventosId = (<Evento[]>JSON.parse(eventosData)).map((m) => m.Oid);
-    if (eventosId) {
-      eventosId.forEach((e) => {
-        const passagemDataTemp: any = this.dataService.valueGet(
-          `dx-data-localStore-${e}`
-        );
-        if (passagemDataTemp) {
-          passagensData.push(passagemDataTemp);
-        }
-      });
+    if (eventosData) {
+      const eventosId = (<Evento[]>JSON.parse(eventosData)).map((m) => m.Oid);
+      if (eventosId) {
+        eventosId.forEach((e) => {
+          const passagemDataTemp: any = this.dataService.valueGet(
+            `dx-data-localStore-${e}`
+          );
+          if (passagemDataTemp) {
+            passagensData.push(passagemDataTemp);
+          }
+        });
+      }
     }
-
     const exportFile: any = btoa(
       JSON.stringify({
         Version: this.appInfoService.currentVersion,
@@ -76,7 +77,11 @@ export class AppDataService {
     );
     const d = new Date();
     this.downloadfile(
-      `backup${d.getFullYear()}${this.pad(d.getMonth()+1)}${this.pad(d.getDate())}${this.pad(d.getHours())}${this.pad(d.getMinutes())}${this.pad(d.getSeconds())}.sct`,
+      `backup${d.getFullYear()}${this.pad(d.getMonth() + 1)}${this.pad(
+        d.getDate()
+      )}${this.pad(d.getHours())}${this.pad(d.getMinutes())}${this.pad(
+        d.getSeconds()
+      )}.sct`,
       exportFile
     );
 
