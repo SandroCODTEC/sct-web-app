@@ -1,7 +1,7 @@
 {
   "name": "SCT",
   "short_name": "SCT",
-  "theme_color": "#ff5722",
+  "theme_color": "#2a2a32",
   "background_color": "#ff5722",
   "display": "standalone",
   "scope": "./",
