@@ -11,6 +11,7 @@ import {
   Saida,
 } from 'src/app/models/congregacao';
 import { PassagemService } from 'src/app/services/passagem.service';
+import { AppDataService } from 'src/app/services/app-data.service';
 
 @Component({
   selector: 'app-passagem',
@@ -31,8 +32,9 @@ export class PassagemComponent implements OnInit {
 
   constructor(
     public dataService: DataService,
-    public passagemService: PassagemService
-  ) {
+    public passagemService: PassagemService,
+    private appDataService: AppDataService
+    ) {
     this.dataSource = this.passagemService.getFiltredPassagens();
     this.dias = this.passagemService.getFiltredDias();
     this.passageiros = dataService.getLocalLookUpDataSource('Passageiros');
@@ -40,6 +42,7 @@ export class PassagemComponent implements OnInit {
     this.eventos = dataService.getLocalLookUpDataSource('Eventos');
 
     this.setPassageiroValue = this.setPassageiroValue.bind(this);
+    this.eventoChanged = this.eventoChanged.bind(this);
   }
 
   ngOnInit(): void {}
@@ -104,4 +107,7 @@ export class PassagemComponent implements OnInit {
     this.passagem = e.data;
     this.dependentes = this.passagemService.getFiltredDepedentes(this.passagem);
   }
+  export = () => {
+    this.appDataService.export(this.passagemService.currentEvento);
+  };
 }

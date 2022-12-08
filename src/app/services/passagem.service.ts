@@ -106,7 +106,7 @@ export class PassagemService {
           date.getDate()
         )}`,
         Text: `${date.getDate()} - ${date.toLocaleString('pt-BR', {
-          weekday: 'short',
+          weekday: 'long',
         })}`,
       });
     }

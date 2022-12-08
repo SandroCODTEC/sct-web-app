@@ -17,7 +17,7 @@ export class CongregacaoComponent implements OnInit {
     | DxFormComponent
     | undefined;
 
-  congregacao: Congregacao | undefined = undefined;
+  congregacao: Congregacao = new Congregacao();
   saidas: any;
   saida: any;
   phonePattern: any = /^[02-9]\d{9}$/;
@@ -44,15 +44,13 @@ export class CongregacaoComponent implements OnInit {
     useSubmitBehavior: true,
   };
 
-  constructor(dataService: DataService) {
+  constructor(private dataService: DataService) {
     const that = this;
-
     dataService
       .getLocalDataStore('Congregacao')
       .load()
       .then((data) => {
-        if (data) {
-          console.log(data);
+        if (data[0] !== undefined) {
           this.congregacao = data[0];
         }
       });
@@ -121,13 +119,13 @@ export class CongregacaoComponent implements OnInit {
   }
 
   onFormSubmit(e: any) {
+    this.dataService.valueSet(
+      'dx-data-localStore-Congregacao',
+      JSON.stringify([this.congregacao])
+    );
     notify(
       {
-        message: 'You have submitted the form',
-        position: {
-          my: 'center top',
-          at: 'center top',
-        },
+        message: 'Dados da congregação salvo com sucesso!',
       },
       'success',
       3000

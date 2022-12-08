@@ -41,6 +41,7 @@ export interface Passagem {
   Dias: any;
   Grupo: any;
   Saida: any;
+  ValorPago: number;
 }
 
 export interface Passageiro {
@@ -50,4 +51,29 @@ export interface Passageiro {
   Documento: string;
   Celular: string;
   Dependentes: any;
+}
+
+export interface Backup {
+  Type: string;
+  Version: string;
+  Congregacao: string;
+  Saidas: string;
+  Eventos: string;
+  Passageiros: string;
+  Dependentes: string;
+  Passagens: BackupPassagem[];
+}
+export interface Arranjo {
+  Type: string;
+  Version: string;
+  Congregacao: any;
+  Saidas: any[];
+  Evento: any;
+  Passageiros: any[];
+  Dependentes: any[];
+  Passagens: any[];
+}
+export interface BackupPassagem {
+  Oid: string;
+  Passagens: string;
 }

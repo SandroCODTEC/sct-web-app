@@ -19,6 +19,9 @@ import {
   DxSelectBoxModule,
   DxTagBoxModule,
   DxTemplateModule,
+  DxToolbarModule,
+  DxResponsiveBoxModule,
+  DxBoxModule,
 } from 'devextreme-angular';
 import { CongregacaoComponent } from './pages/congregacao/congregacao.component';
 import { EventoComponent } from './pages/evento/evento.component';
@@ -27,6 +30,7 @@ import { PassagemComponent } from './pages/passagem/passagem.component';
 import { HelpComponent } from './pages/help/help.component';
 import { PrivicyComponent } from './pages/privicy/privicy.component';
 import { TermsComponent } from './pages/terms/terms.component';
+import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
   {
@@ -92,6 +96,10 @@ const routes: Routes = [
     DxTagBoxModule,
     DxSelectBoxModule,
     DxFileUploaderModule,
+    DxToolbarModule,
+    DxResponsiveBoxModule,
+    DxBoxModule,
+    CommonModule
   ],
   providers: [AuthGuardService],
   exports: [RouterModule],

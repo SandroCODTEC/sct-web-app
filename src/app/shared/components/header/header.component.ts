@@ -79,12 +79,11 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   openDialog = () => (this.openFileDialog = true);
   restore = async (e: any) => {
     const text = await e[0].text();
-    console.log(text);
+    // console.log(text);
     this.openFileDialog = false;
+    this.appDataService.restore(text);
   };
-  export = () => {
-    this.appDataService.export();
-  };
+
 }
 
 @NgModule({

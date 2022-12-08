@@ -1,7 +1,7 @@
 {
-  "name": "sct-web-app",
-  "short_name": "sct-web-app",
-  "theme_color": "#1976d2",
+  "name": "SCT",
+  "short_name": "SCT",
+  "theme_color": "#ff5722",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",

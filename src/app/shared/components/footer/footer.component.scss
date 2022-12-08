@@ -7,3 +7,14 @@
   padding-top: 20px;
   padding-bottom: 24px;
 }
+
+
+.col-span {
+  width: 100%;
+}
+
+@media screen and (max-width: 700px) {
+  .col-span {
+     width: calc(100vh / 3);
+  }
+}
