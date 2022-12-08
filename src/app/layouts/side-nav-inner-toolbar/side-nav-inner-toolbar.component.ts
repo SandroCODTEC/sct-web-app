@@ -48,15 +48,30 @@ export class SideNavInnerToolbarComponent implements OnInit {
     private updates: SwUpdate
   ) {
     if (updates.isEnabled) {
-      interval(6 * 60 * 60).subscribe(
-        () => {
+      interval(6 * 60 * 60).subscribe(() => {
         console.log('checking for updates');
-        if (this.updateAvailable) this.checkForUpdates();
-        }
-      );
+        if (!this.updateAvailable) this.checkForUpdates();
+        else console.log('wait update');
+      });
     }
   }
 
+  public updateAvailable: boolean = false;
+
+  public checkForUpdates(): void {
+    this.updates.checkForUpdate().then((event) => {
+      console.log('updating available');
+      this.updateAvailable = event;
+    });
+  }
+
+  updateNow(): void {
+    console.log('updating to new version');
+    this.updates.activateUpdate().then(() => {
+      notify('Sistema atualizado com sucesso!', 'success', 10000);
+      window.location.reload();
+    });
+  }
   ngOnInit() {
     this.menuOpened = this.screen.sizes['screen-large'];
 
@@ -123,22 +138,6 @@ export class SideNavInnerToolbarComponent implements OnInit {
     }
   }
 
-  public updateAvailable: boolean = false;
-
-  public checkForUpdates(): void {
-    this.updates.checkForUpdate().then((event) => {
-      console.log('updating available');
-      this.updateAvailable = event;
-    });
-  }
-
-  updateNow(): void {
-    console.log('updating to new version');
-    this.updates.activateUpdate().then(() => {
-      notify('Sistema atualizado com sucesso!', 'success', 10000);
-      window.location.reload();
-    });
-  }
 }
 
 @NgModule({
