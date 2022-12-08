@@ -49,8 +49,10 @@ export class SideNavInnerToolbarComponent implements OnInit {
   ) {
     if (updates.isEnabled) {
       interval(6 * 60 * 60).subscribe(
-        () => this.checkForUpdates()
-        // updates.checkForUpdate().then(() => console.log('checking for updates'))
+        () => {
+        console.log('checking for updates');
+        if (this.updateAvailable) this.checkForUpdates();
+        }
       );
     }
   }
@@ -125,7 +127,7 @@ export class SideNavInnerToolbarComponent implements OnInit {
 
   public checkForUpdates(): void {
     this.updates.checkForUpdate().then((event) => {
-      //this.updateNow();
+      console.log('updating available');
       this.updateAvailable = event;
     });
   }
