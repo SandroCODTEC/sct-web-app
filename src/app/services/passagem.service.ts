@@ -13,7 +13,7 @@ export class PassagemService {
   public grupos: any;
 
   constructor(private dataService: DataService) {
-    this.currentEvento = dataService.valueGet('currentEvento');
+    this.currentEvento = this.getEventoOid();
     this.primeiraSaida = this.getPrimeiraSaida();
     this.grupos = this.getGrupos();
   }
@@ -23,6 +23,16 @@ export class PassagemService {
     );
     if (saidasList?.length > 0) return saidasList[0].Oid;
     else return '';
+  }
+  private getEventoOid(): string {
+    const oid = this.dataService.valueGet('currentEvento');
+    if (!this.currentEvento) {
+      const list = <Saida[]>(
+        JSON.parse(this.dataService.valueGet('dx-data-localStore-Eventos'))
+      );
+      if (list?.length > 0) return list[0].Oid;
+      else return '';
+    } else return oid;
   }
   getFiltredDepedentes(passagem: Passagem) {
     return {

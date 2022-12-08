@@ -4,6 +4,7 @@ import { Evento, Passagem } from 'src/app/models/congregacao';
 import { DataService } from 'src/app/services/local-data.service';
 import Query from 'devextreme/data/query';
 import { PassagemService } from 'src/app/services/passagem.service';
+import notify from 'devextreme/ui/notify';
 
 @Component({
   templateUrl: 'home.component.html',
@@ -26,6 +27,12 @@ export class HomeComponent implements AfterViewInit {
     this.changeEvento();
   }
   changeEvento() {
+    if (!this.passagemService.currentEvento) {
+      notify(
+        'Você precisa informar os dados da sua congregação e depois criar um novo evento.','danger', 10000
+      );
+      return;
+    }
     this.estatisticas = [];
     this.finCusto = 0;
     this.finRecebido = 0;
