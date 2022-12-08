@@ -30,8 +30,10 @@ export class PassagemService {
       const list = <Saida[]>(
         JSON.parse(this.dataService.valueGet('dx-data-localStore-Eventos'))
       );
-      if (list?.length > 0) return list[0].Oid;
-      else return '';
+      if (list?.length > 0) {
+        this.dataService.valueSet('currentEvento', list[0].Oid);
+        return list[0].Oid;
+      } else return '';
     } else return oid;
   }
   getFiltredDepedentes(passagem: Passagem) {

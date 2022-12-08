@@ -50,11 +50,6 @@ export class HomeComponent implements AfterViewInit {
           if (p.ValorPago) this.finRecebido += p.ValorPago;
           if (p.Dependentes) totalDependentes += p.Dependentes.length;
         });
-        this.estatisticas.push({
-          Name: 'Total Geral',
-          Passagens: data.length,
-          Dependentes: totalDependentes,
-        });
         const dias = this.passagemService.getFiltredDias();
         dias.forEach((d) => {
           this.estatisticas.push({
@@ -63,23 +58,11 @@ export class HomeComponent implements AfterViewInit {
             Dependentes: totalDependentes,
           });
         });
-        // let query = Query(data);
-        // query
-        //   .filter((f: Passagem) => f.ValorPago !== undefined)
-        //   .select('ValorPago')
-        //   .sum()
-        //   .then((valor) => {
-        //     debugger;
-        //     this.finRecebido = valor;
-        //   });
-        // Query(
-        //   query
-        //     .select('Dias')
-        //     .toArray()
-        //     .map((m: []) => m.length)
-        // )
-        //   .sum()
-        //   .then((soma) => (this.finCusto = soma * this.evento.ValorPassagem));
+        this.estatisticas.push({
+          Name: 'Total Geral',
+          Passagens: data.length,
+          Dependentes: totalDependentes,
+        });
       });
   }
   ngAfterViewInit(): void {}

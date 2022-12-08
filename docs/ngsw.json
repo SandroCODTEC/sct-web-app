@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1670484226907,
+  "timestamp": 1670508305268,
   "index": "/sct-web-app/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/sct-web-app/favicon.ico",
         "/sct-web-app/index.html",
-        "/sct-web-app/main.ee4c940ba82b9bd0.js",
+        "/sct-web-app/main.615da64b7d779d51.js",
         "/sct-web-app/manifest.webmanifest",
         "/sct-web-app/polyfills.8a57ee71b9ffce31.js",
         "/sct-web-app/runtime.de9ca5fb4fc6e4a0.js",
@@ -84,9 +84,9 @@
     "/sct-web-app/dxiconsmaterial.69bb0ff08e675b9a.woff": "9af6aafc6db1a6f54a031d5b1b25dca191c6ab10",
     "/sct-web-app/dxiconsmaterial.ae7487343696a16d.ttf": "c8079135961fe4cb5077bbdd9b7fb3f37918edef",
     "/sct-web-app/favicon.ico": "4d212ceb98b83ce668c66185eacd305d424e66cc",
-    "/sct-web-app/index.html": "b58be9eb47dc9d4279b0519a901347e50bad01a4",
-    "/sct-web-app/main.ee4c940ba82b9bd0.js": "6c07a4151b02ff55b573a853c08ae2301ed1975a",
-    "/sct-web-app/manifest.webmanifest": "d95e926af15cbad317a850b264c90fb04dd74a07",
+    "/sct-web-app/index.html": "55cccc5c6273e717c0189c818055e0f1ca9f0a84",
+    "/sct-web-app/main.615da64b7d779d51.js": "0fb0440d6939d51af8c86ed11d3600cce57a339a",
+    "/sct-web-app/manifest.webmanifest": "d6dbc6537fa3719da98b1d236625bd8ab0fad811",
     "/sct-web-app/polyfills.8a57ee71b9ffce31.js": "59f27aa41616413711ec378ddadaf25c5e0d24fc",
     "/sct-web-app/runtime.de9ca5fb4fc6e4a0.js": "80447d02da00740538997dc7e74eea7309a2fd88",
     "/sct-web-app/styles.2eb22b6ba9859143.css": "b17da786838f87b4db3f539ebb6031f6562cc7b8"

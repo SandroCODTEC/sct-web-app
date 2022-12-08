@@ -8,25 +8,24 @@
       {{ evento.DataFinal | date : "dd/MM" }}
     </div>
   </div>
-  <div class="dx-card responsive-paddings text-center col-span" style="margin-top: 20px">
-    <dx-box direction="row" width="100%">
-      <dxi-item [ratio]="3" style="text-align: center; font-size: small">
-        <div class="title"><strong>Valor da Passagem</strong></div>
-        <div>
-          <strong>
-            {{ evento.ValorPassagem | currency : "BRL" : true : "1.2-2" }}
-          </strong>
-        </div>
-      </dxi-item>
-    </dx-box>
-  </div>
-  <div class="dx-card responsive-paddings text-center col-span" style="margin-top: 20px">
+  <div
+    class="dx-card responsive-paddings text-center col-span"
+    style="margin-top: 20px"
+  >
     <div class="title"><strong>Financeiro</strong></div>
     <dx-box direction="row" width="100%">
       <dxi-item [ratio]="1" style="text-align: end; font-size: small">
+        <div>Valor da Passagem:</div>
+        <div class="title" style="padding-bottom: 15px"></div>
         <div>Custo do Arranjo:</div>
         <div>Valor Recebido:</div>
-        <div style="border-top: 1px solid rgba(0, 0, 0, 0.1); margin-top: 10px;padding-top: 10px;">
+        <div
+          style="
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+            padding-top: 10px;
+          "
+        >
           Superávit/Déficit:
         </div>
       </dxi-item>
@@ -34,6 +33,12 @@
         [ratio]="1"
         style="text-align: left; font-size: small; padding-left: 10px"
       >
+        <div>
+          <strong>
+            {{ evento?.ValorPassagem | currency : "BRL" : true : "1.2-2" }}
+          </strong>
+        </div>
+        <div class="title" style="padding-bottom: 15px"></div>
         <div>
           <strong>
             {{ finCusto | currency : "BRL" : true : "1.2-2" }}
@@ -44,7 +49,13 @@
             {{ finRecebido | currency : "BRL" : true : "1.2-2" }}
           </strong>
         </div>
-        <div style="border-top: 1px solid rgba(0, 0, 0, 0.1); margin-top: 10px;padding-top: 10px;">
+        <div
+          style="
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+            padding-top: 10px;
+          "
+        >
           <strong>
             {{ finRecebido - finCusto | currency : "BRL" : true : "1.2-2" }}
           </strong>
@@ -52,25 +63,35 @@
       </dxi-item>
     </dx-box>
   </div>
-  <div class="dx-card responsive-paddings text-center col-span" style="margin-top: 20px">
+  <div
+    class="dx-card responsive-paddings text-center col-span"
+    style="margin-top: 20px"
+  >
     <div class="title"><strong>Estatísticas</strong></div>
-    <div *ngFor="let item of estatisticas" style="padding-bottom: 10px">
-        <div class="title"></div>
-        <div class="title">{{ item.Name }}</div>
 
-      <dx-box direction="row" width="100%">
-        <dxi-item [ratio]="1" style="text-align: end; font-size: small">
-          <div>Passagens:</div>
-          <div>Dependentes:</div>
-        </dxi-item>
-        <dxi-item 
-          [ratio]="1"
-          style="text-align: left; font-size: small; padding-left: 10px; padding-bottom:  15px;"
-        >
-          <div>{{ item.Passagens }}</div>
-          <div>{{ item.Dependentes }}</div>
-        </dxi-item>
-      </dx-box>
+    <div style="padding-bottom: 10px">
+      <table style="width: 100%">
+        <tbody>
+          <tr>
+            <th class="title2">&nbsp;Descrição</th>
+            <th class="title2" *ngFor="let item of estatisticas">
+              &nbsp;{{ item.Name }}
+            </th>
+          </tr>
+          <tr>
+            <td>&nbsp;Passagem:</td>
+            <td *ngFor="let item of estatisticas">
+              &nbsp;{{ item.Passagens }}
+            </td>
+          </tr>
+          <tr>
+            <td>&nbsp;Dependentes:</td>
+            <td *ngFor="let item of estatisticas">
+              &nbsp;{{ item.Dependentes }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
