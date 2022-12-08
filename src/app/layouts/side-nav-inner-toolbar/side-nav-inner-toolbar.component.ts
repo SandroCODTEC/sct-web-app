@@ -48,8 +48,9 @@ export class SideNavInnerToolbarComponent implements OnInit {
     private updates: SwUpdate
   ) {
     if (updates.isEnabled) {
-      interval(6 * 60 * 60).subscribe(() =>
-        updates.checkForUpdate().then(() => console.log('checking for updates'))
+      interval(6 * 60 * 60).subscribe(
+        () => this.checkForUpdates()
+        // updates.checkForUpdate().then(() => console.log('checking for updates'))
       );
     }
   }
