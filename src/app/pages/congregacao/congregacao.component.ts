@@ -138,7 +138,8 @@ export class CongregacaoComponent implements OnInit {
     this.saida.Latitude = e.location.lat;
     this.saida.Longitude = e.location.lng;
     let rowIndex = this.dataGrid?.instance.getRowIndexByKey(this.saida.Oid);
-    rowIndex = rowIndex ? rowIndex : 0;
+    if (rowIndex == -1) rowIndex = 0;
+    else rowIndex = rowIndex ? rowIndex : -1;
     this.dataGrid?.instance.cellValue(rowIndex, 'Latitude', e.location.lat);
     this.dataGrid?.instance.cellValue(rowIndex, 'Longitude', e.location.lng);
     this.saidaMarker = this.getGenerateSaidaMarker(this.saida);
@@ -189,5 +190,9 @@ export class CongregacaoComponent implements OnInit {
     e.data.Longitude = 0;
     this.saidaMarker = undefined;
     this.saida = e.data;
+  }
+  showMapaSaida(e: any) {
+    this.saida = e.row.data;
+    this.showMapSaida = true;
   }
 }

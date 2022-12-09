@@ -1,4 +1,12 @@
-<div class="content-block">
+<div class="content-block" *ngIf="this.passagemService.currentEvento === ''">
+  <div class="dx-card responsive-paddings text-center">
+    <h6>
+      Antes de prosseguir, informe os dados da sua congregação e depois crie um
+      novo evento.
+    </h6>
+  </div>
+</div>
+<div class="content-block" *ngIf="this.passagemService.currentEvento !== ''">
   <div class="dx-card responsive-paddings text-center">
     <div class="title"><strong>Evento</strong></div>
     <div>{{ evento.Descricao }}</div>
@@ -21,7 +29,7 @@
         <div>Valor Recebido:</div>
         <div
           style="
-            border-top: 1px solid rgba(255,255,255,.42);;
+            border-top: 1px solid rgba(255, 255, 255, 0.42);
             margin-top: 10px;
             padding-top: 10px;
           "
@@ -51,7 +59,7 @@
         </div>
         <div
           style="
-            border-top: 1px solid rgba(255,255,255,.42);;
+            border-top: 1px solid rgba(255, 255, 255, 0.42);
             margin-top: 10px;
             padding-top: 10px;
           "

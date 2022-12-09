@@ -1,4 +1,47 @@
 <h2 class="content-block">Ajuda do Sistema</h2>
 <div class="content-block">
-    <div class="dx-card responsive-paddings">Put your content here</div>
+  <div class="dx-card responsive-paddings">
+    <p class="title">O que é o SCT?</p>
+    <p>
+      O SCT (Sistema Coordenado de Transporte) é um sistema web que, se
+      instalado, roda de modo offline sem a necessidade de internet. Todos os
+      dados são armazenados localmente no dispositivo do usuário.
+    </p>
+    <p class="title">Quem pode usar? É pago?</p>
+    <p>
+      Qualquer pessoa pode usar o SCT de acordo com o seu
+      <a href="/#/pages/terms">Termo de Uso</a>. O sistema é gratuito e ninguém
+      precisa pagar ou fazer nenhum tipo de contrapartida para usá-lo.
+    </p>
+    <p class="title">Como aprendo a trabalhar no sistema?</p>
+    <p>
+      Preparamos abaixo alguns tutoriais em vídeo que serão de ajuda a todos. O
+      tempo total dos vídeos é de 6 minutos.
+    </p>
+    <div *ngFor="let video of videos">
+      <p class="title">{{ video.title }}</p>
+      <div class="video" *ngIf="!video.run" (click)="runVideo(video)">
+        <div class="img">
+          <h5 class="text-center">{{ video.title }}</h5>
+        </div>
+        <!-- <img
+          src="/assets/tumb.png"
+          alt="{{ video.title }}"
+          (click)="runVideo(video)"
+        /> -->
+      </div>
+      <div class="video" *ngIf="video.run">
+        <iframe
+          [src]="getUrlVideo(video.videoId)"
+          allow="autoplay"
+          width="100%"
+          frameborder="0"
+          webkitallowfullscreen
+          mozallowfullscreen
+          allowfullscreen
+        >
+        </iframe>
+      </div>
+    </div>
+  </div>
 </div>

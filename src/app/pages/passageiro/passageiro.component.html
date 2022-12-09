@@ -10,7 +10,10 @@
   [columnHidingEnabled]="true"
   [showColumnHeaders]="false"
   (onInitNewRow)="
-    $event.data.Ativo = true; $event.data.Dependentes = []; dependentes = null
+    $event.data.Ativo = true;
+    $event.data.Oid = getGenerateOid();
+    $event.data.Dependentes = [];
+    dependentes = null
   "
 >
   <dxo-search-panel
@@ -177,7 +180,7 @@
         dataField="Nome"
         caption="Nome do Dependente"
         dataType="string"
-        [visible]="false"
+        [visible]="true"
       >
         <dxi-validation-rule
           type="required"

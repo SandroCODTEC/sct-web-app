@@ -21,8 +21,7 @@ import {
   DxTemplateModule,
   DxToolbarModule,
   DxResponsiveBoxModule,
-  DxBoxModule,
-} from 'devextreme-angular';
+  DxBoxModule} from 'devextreme-angular';
 import { CongregacaoComponent } from './pages/congregacao/congregacao.component';
 import { EventoComponent } from './pages/evento/evento.component';
 import { PassageiroComponent } from './pages/passageiro/passageiro.component';
@@ -99,7 +98,7 @@ const routes: Routes = [
     DxToolbarModule,
     DxResponsiveBoxModule,
     DxBoxModule,
-    CommonModule
+    CommonModule,
   ],
   providers: [AuthGuardService],
   exports: [RouterModule],
@@ -113,6 +112,7 @@ const routes: Routes = [
     HelpComponent,
     PrivicyComponent,
     TermsComponent,
+
   ],
 })
 export class AppRoutingModule {}

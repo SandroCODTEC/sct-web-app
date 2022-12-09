@@ -21,16 +21,13 @@ export class HomeComponent implements AfterViewInit {
   estatisticas: any[] = [];
   constructor(
     private dataService: DataService,
-    private passagemService: PassagemService
+    public passagemService: PassagemService
   ) {
     this.eventoStore = dataService.getLocalDataStore('Eventos');
     this.changeEvento();
   }
   changeEvento() {
     if (!this.passagemService.currentEvento) {
-      notify(
-        'Você precisa informar os dados da sua congregação e depois criar um novo evento.','danger', 10000
-      );
       return;
     }
     this.estatisticas = [];
