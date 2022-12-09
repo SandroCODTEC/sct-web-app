@@ -10,38 +10,36 @@ export class HelpComponent implements OnInit {
   videos = [
     {
       run: false,
-      videoId: 'QYX1zchuSow',
+      videoId: 'Xr6reOHBNRs',
       title: 'Meu primeiro acesso',
     },
     {
       run: false,
-      videoId: 'pa-EoBKAcNU',
+      videoId: 'L9uI1_FgH9Q',
       title: 'Cadastrando locais de saída',
     },
     {
       run: false,
-      videoId: 'TC8i90t0JKg',
+      videoId: 'A71Eu2Lh83E',
       title: 'Cadastrando eventos',
     },
     {
       run: false,
-      videoId: 'QYX1zchuSow',
+      videoId: '0T26Hr0BOy0',
       title: 'Cadastrando passageiros',
     },
     {
       run: false,
-      videoId: 'QYX1zchuSow',
+      videoId: '_u4c-ieiZrc',
       title: 'Cadastrando passagens',
     },
     {
       run: false,
-      videoId: 'QYX1zchuSow',
+      videoId: 'qeaSxAFK0X0',
       title: 'Transferência de dados',
     },
   ];
 
-  primeiroAcesso = 'QYX1zchuSow';
-  primeiroAcessoRun = false;
   constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {}
@@ -53,10 +51,20 @@ export class HelpComponent implements OnInit {
         '?autoplay=1&loop=1&autopause=0&muted=1'
     );
   }
+
+  showPopupVideo = false;
+  video = {
+    run: false,
+    videoId: '',
+    title: '',
+  };
   runVideo(currentVideo: any) {
     this.videos.forEach((video) => {
       video.run = false;
     });
     currentVideo.run = true;
+    this.showPopupVideo = true;
+
+    this.video = currentVideo;
   }
 }

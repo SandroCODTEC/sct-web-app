@@ -20,28 +20,36 @@
     </p>
     <div *ngFor="let video of videos">
       <p class="title">{{ video.title }}</p>
-      <div class="video" *ngIf="!video.run" (click)="runVideo(video)">
+      <div class="video" (click)="runVideo(video)">
         <div class="img">
           <h5 class="text-center">{{ video.title }}</h5>
         </div>
-        <!-- <img
-          src="/assets/tumb.png"
-          alt="{{ video.title }}"
-          (click)="runVideo(video)"
-        /> -->
-      </div>
-      <div class="video" *ngIf="video.run">
-        <iframe
-          [src]="getUrlVideo(video.videoId)"
-          allow="autoplay"
-          width="100%"
-          frameborder="0"
-          webkitallowfullscreen
-          mozallowfullscreen
-          allowfullscreen
-        >
-        </iframe>
       </div>
     </div>
   </div>
 </div>
+
+<dx-popup
+  [showTitle]="true"
+  title="{{ video.title }}"
+  [dragEnabled]="false"
+  [hideOnOutsideClick]="true"
+  [showCloseButton]="true"
+  container=".dx-viewport"
+  [fullScreen]="true"
+  [(visible)]="showPopupVideo"
+>
+  <div *dxTemplate="let data of 'content'">
+    <iframe
+      [src]="getUrlVideo(video.videoId)"
+      allow="autoplay"
+      width="100%"
+      height="100%"
+      frameborder="0"
+      webkitallowfullscreen
+      mozallowfullscreen
+      allowfullscreen
+    >
+    </iframe>
+  </div>
+</dx-popup>
