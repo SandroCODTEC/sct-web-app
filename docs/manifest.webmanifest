@@ -2,7 +2,7 @@
   "name": "SCT",
   "short_name": "SCT",
   "theme_color": "#2a2a32",
-  "background_color": "#ff5722",
+  "background_color": "#ffffff",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
