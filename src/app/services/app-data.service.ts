@@ -104,6 +104,7 @@ export class AppDataService {
     const congregacaoData: any = this.dataService.valueGet(
       'dx-data-localStore-Congregacao'
     );
+    const congregacao: Congregacao = congregacaoData ? JSON.parse(congregacaoData)[0] : {};
     const saidasData: any = this.dataService.valueGet(
       'dx-data-localStore-Saidas'
     );
@@ -133,7 +134,7 @@ export class AppDataService {
       JSON.stringify({
         Type: 'sct',
         Version: this.appInfoService.currentVersion,
-        Congregacao: congregacaoData ? JSON.parse(congregacaoData)[0] : {},
+        Congregacao: congregacao,
         Saidas: saidasData ? JSON.parse(saidasData) : [],
         Evento: eventosData ? JSON.parse(eventosData) : {},
         Passageiros: passageirosData ? JSON.parse(passageirosData) : [],
@@ -143,7 +144,7 @@ export class AppDataService {
     );
     const d = new Date();
     this.downloadfile(
-      `sct${d.getFullYear()}${this.pad(d.getMonth() + 1)}${this.pad(
+      `${congregacao?.Nome} - ${d.getFullYear()}${this.pad(d.getMonth() + 1)}${this.pad(
         d.getDate()
       )}${this.pad(d.getHours())}${this.pad(d.getMinutes())}${this.pad(
         d.getSeconds()
