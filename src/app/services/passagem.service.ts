@@ -106,24 +106,48 @@ export class PassagemService {
     );
   }
   private daysBetween(d1: Date, d2: Date) {
-    var diff = Math.abs(d1.getTime() - d2.getTime());
-    var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+    let nextDate: Date = new Date(d1);
+    let lastDate: Date = new Date(d2);
+    let days:any[] = [];
 
-    let days = [];
-    for (let i = 0; i < diffDays; i++) {
-      let dayRef = new Date(d1);
-      const date = new Date(dayRef.setDate(dayRef.getDate() + i));
+    while (nextDate <= lastDate) {
       days.push({
-        Value: `${date.getFullYear()}${date.getMonth()}${this.pad(
-          date.getDate()
+        Value: `${nextDate.getFullYear()}${this.pad(nextDate.getMonth())}${this.pad(
+          nextDate.getDate()
         )}`,
-        Text: `${date.getDate()} - ${date.toLocaleString('pt-BR', {
+        Text: `${nextDate.getDate()} - ${nextDate.toLocaleString('pt-BR', {
           weekday: 'long',
         })}`,
       });
+
+      nextDate = this.addDays(nextDate, 1);
     }
+
+    // var diff = Math.abs(d1.getTime() - d2.getTime());
+    // var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+
+    // let days = [];
+    // for (let i = 0; i < diffDays; i++) {
+    //   let dayRef = new Date(d1);
+    //   const date = new Date(dayRef.setDate(dayRef.getDate() + i));
+    //   days.push({
+    //     Value: `${date.getFullYear()}${date.getMonth()}${this.pad(
+    //       date.getDate()
+    //     )}`,
+    //     Text: `${date.getDate()} - ${date.toLocaleString('pt-BR', {
+    //       weekday: 'long',
+    //     })}`,
+    //   });
+    // }
     return days;
   }
+
+  addDays(date: Date, days: number): Date {
+    let result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
+
   private pad(d: number) {
     return d < 10 ? '0' + d.toString() : d.toString();
   }
@@ -164,24 +188,35 @@ export class PassagemService {
     return grupos;
   }
 
-  insertBulkPassageiros() {
-    const store = this.dataService.getLocalDataStore(
-      this.currentEvento ? this.currentEvento : ''
-    );
+  async insertBulkPassageiros() {
+    if (!this.currentEvento) {
+      notify('Selecione um evento e tente novamente!', 'success');
+      return;
+    }
+    const store = this.dataService.getLocalDataStore(this.currentEvento);
     const ps = this.getNovosPassageiros();
-    ps.forEach((p) => {
-      store
+    if (ps.length === 0) {
+      notify('Não há dados a serem importados!', 'warning');
+      return;
+    }
+
+    let countInsert = 1;
+    ps.forEach(async (p) => {
+      await store
         .insert(p)
         .then((values) => {
-          console.log(values);
+          if (countInsert == ps.length) {
+            notify('Passagens importadas com sucesso!', 'success');
+            return;
+          } else {
+            countInsert++;
+          }
         })
         .catch((error) => {
           console.log(error);
+          notify(error, 'success');
+          return;
         });
-    });
-    store.load().then((data) => {
-      notify('Passagens importadas com sucesso!', 'success');
-      window.location.reload();
     });
   }
 }

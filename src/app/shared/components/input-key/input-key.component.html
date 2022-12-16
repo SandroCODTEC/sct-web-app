@@ -1,0 +1,73 @@
+<dx-popup
+  [width]="width"
+  [height]="height"
+  [showTitle]="true"
+  title="Chave de Criptografia"
+  [dragEnabled]="true"
+  [hideOnOutsideClick]="false"
+  [showCloseButton]="true"
+  [(visible)]="show"
+>
+  <dxi-toolbar-item
+    widget="dxButton"
+    toolbar="bottom"
+    location="before"
+    [options]="{
+      icon: 'folder',
+      text: 'Ok',
+      onClick: ok
+    }"
+  >
+  </dxi-toolbar-item>
+  <dxi-toolbar-item
+    widget="dxButton"
+    toolbar="bottom"
+    location="before"
+    [options]="{
+      icon: 'key',
+      text: 'Gerar chave aleatória',
+      onClick: makeKey
+    }"
+  >
+  </dxi-toolbar-item>
+  <dxi-toolbar-item
+    widget="dxButton"
+    toolbar="bottom"
+    location="after"
+    [options]="{
+      icon: 'folder',
+      text: 'Cancelar',
+      onClick: cancel
+    }"
+  >
+  </dxi-toolbar-item>
+  <div *dxTemplate="let data of 'content'">
+    <div class="long-title">
+      <h3>Crie a sua chave e envie junto com o arquivo para o seu SCT.</h3>
+    </div>
+    <dx-form
+      id="form"
+      [(formData)]="value"
+      labelMode="floating"
+      validationGroup="keyData"
+    >
+      <dxi-item dataField="Chave" [colSpan]="6">
+        <dxi-validation-rule type="required" message="Chave obrigatória!">
+        </dxi-validation-rule>
+        <dxi-validation-rule
+          type="stringLength"
+          [min]="16"
+          [max]="16"
+          message="Informe 16 caracteres!"
+        >
+        </dxi-validation-rule>
+        <dxi-validation-rule
+          type="pattern"
+          [pattern]="keyPattern"
+          message="Informe apenas letras e números!"
+        >
+        </dxi-validation-rule>
+      </dxi-item>
+    </dx-form>
+  </div>
+</dx-popup>

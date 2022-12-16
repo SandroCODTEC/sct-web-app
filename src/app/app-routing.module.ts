@@ -21,7 +21,8 @@ import {
   DxTemplateModule,
   DxToolbarModule,
   DxResponsiveBoxModule,
-  DxBoxModule} from 'devextreme-angular';
+  DxBoxModule,
+  DxTextBoxModule} from 'devextreme-angular';
 import { CongregacaoComponent } from './pages/congregacao/congregacao.component';
 import { EventoComponent } from './pages/evento/evento.component';
 import { PassageiroComponent } from './pages/passageiro/passageiro.component';
@@ -30,6 +31,7 @@ import { HelpComponent } from './pages/help/help.component';
 import { PrivicyComponent } from './pages/privicy/privicy.component';
 import { TermsComponent } from './pages/terms/terms.component';
 import { CommonModule } from '@angular/common';
+import { InputKeyComponent } from './shared/components/input-key/input-key.component';
 
 const routes: Routes = [
   {
@@ -99,6 +101,7 @@ const routes: Routes = [
     DxResponsiveBoxModule,
     DxBoxModule,
     CommonModule,
+    DxTextBoxModule
   ],
   providers: [AuthGuardService],
   exports: [RouterModule],
@@ -112,7 +115,7 @@ const routes: Routes = [
     HelpComponent,
     PrivicyComponent,
     TermsComponent,
-
+    InputKeyComponent
   ],
 })
 export class AppRoutingModule {}

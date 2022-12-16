@@ -12,6 +12,7 @@ import {
 } from 'src/app/models/congregacao';
 import { PassagemService } from 'src/app/services/passagem.service';
 import { AppDataService } from 'src/app/services/app-data.service';
+import { InputKeyComponent } from 'src/app/shared/components/input-key/input-key.component';
 
 @Component({
   selector: 'app-passagem',
@@ -21,6 +22,9 @@ import { AppDataService } from 'src/app/services/app-data.service';
 export class PassagemComponent implements OnInit {
   @ViewChild(DxDataGridComponent, { static: false }) dataGrid:
     | DxDataGridComponent
+    | undefined;
+    @ViewChild(InputKeyComponent, { static: false }) input:
+    | InputKeyComponent
     | undefined;
   dataSource: any;
   passagem: any;
@@ -34,13 +38,14 @@ export class PassagemComponent implements OnInit {
     public dataService: DataService,
     public passagemService: PassagemService,
     private appDataService: AppDataService
-    ) {
+  ) {
     this.dataSource = this.passagemService.getFiltredPassagens();
     this.dias = this.passagemService.getFiltredDias();
     this.passageiros = dataService.getLocalLookUpDataSource('Passageiros');
     this.saidas = dataService.getLocalLookUpDataSource('Saidas');
     this.eventos = dataService.getLocalLookUpDataSource('Eventos');
 
+    this.importarPassageiros = this.importarPassageiros.bind(this);
     this.setPassageiroValue = this.setPassageiroValue.bind(this);
     this.eventoChanged = this.eventoChanged.bind(this);
   }
@@ -82,13 +87,20 @@ export class PassagemComponent implements OnInit {
     this.passagemService.currentEvento = e.value;
     this.dataSource = this.passagemService.getFiltredPassagens();
     this.dias = this.passagemService.getFiltredDias();
+  }
+  importarPassageiros(e: any) {
     if (this.passagemService.getTotalPassagens(e.value) === -1) {
       confirm(
-        'Notamos que não há passagens para este evento. Podemos importar todos os passageiro e preparar a lista para você. Depois você só ajusta.',
+        'Podemos importar todos os passageiro e preparar a lista para você.<br>Depois você só ajusta.',
         'Deseja importar os passageiros?'
       ).then((dialogResult) => {
         if (dialogResult) {
-          this.passagemService.insertBulkPassageiros();
+          this.passagemService
+            .insertBulkPassageiros()
+            .then(
+              (_) =>
+                (this.dataSource = this.passagemService.getFiltredPassagens())
+            );
         }
       });
     }
@@ -108,6 +120,11 @@ export class PassagemComponent implements OnInit {
     this.dependentes = this.passagemService.getFiltredDepedentes(this.passagem);
   }
   export = () => {
-    this.appDataService.export(this.passagemService.currentEvento);
+    this.input?.showDialog();
   };
+
+  saved(value: any) {
+    console.log(value);
+    this.appDataService.export(value.Chave, this.passagemService.currentEvento);
+  }
 }

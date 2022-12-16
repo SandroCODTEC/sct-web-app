@@ -8,6 +8,7 @@ import {
   Evento,
 } from '../models/congregacao';
 import { AppInfoService } from '../shared/services';
+import { CriptoService } from './cripto.service';
 import { DataService } from './local-data.service';
 
 @Injectable({
@@ -17,6 +18,7 @@ export class AppDataService {
   constructor(
     private dataService: DataService,
     private appInfoService: AppInfoService,
+    private criptoService: CriptoService,
     private sanitizer: DomSanitizer
   ) {}
   fileHandle: any;
@@ -88,6 +90,9 @@ export class AppDataService {
         Passagens: passagensData,
       })
     );
+
+    // const encryptedFile = this.criptoService.encryptUsingAES2560(exportFile).toString();
+
     const d = new Date();
     this.downloadfile(
       `backup${d.getFullYear()}${this.pad(d.getMonth() + 1)}${this.pad(
@@ -100,11 +105,13 @@ export class AppDataService {
 
     notify('Backup realizado com sucesso!', 'success', 10000);
   }
-  export(eventoId: string) {
+  export(chave: string, eventoId: string) {
     const congregacaoData: any = this.dataService.valueGet(
       'dx-data-localStore-Congregacao'
     );
-    const congregacao: Congregacao = congregacaoData ? JSON.parse(congregacaoData)[0] : {};
+    const congregacao: Congregacao = congregacaoData
+      ? JSON.parse(congregacaoData)[0]
+      : {};
     const saidasData: any = this.dataService.valueGet(
       'dx-data-localStore-Saidas'
     );
@@ -130,26 +137,43 @@ export class AppDataService {
         passagens = JSON.parse(passagemDataTemp);
       }
     }
-    const exportFile: any = btoa(
-      JSON.stringify({
-        Type: 'sct',
-        Version: this.appInfoService.currentVersion,
-        Congregacao: congregacao,
-        Saidas: saidasData ? JSON.parse(saidasData) : [],
-        Evento: eventosData ? JSON.parse(eventosData) : {},
-        Passageiros: passageirosData ? JSON.parse(passageirosData) : [],
-        Dependentes: dependentesData ? JSON.parse(dependentesData) : [],
-        Passagens: passagens,
-      })
-    );
+
+    console.log({
+      Type: 'sct',
+      Version: this.appInfoService.currentVersion,
+      Congregacao: congregacao,
+      Saidas: saidasData ? JSON.parse(saidasData) : [],
+      Evento: eventosData
+        ? (<Evento[]>JSON.parse(eventosData)).find((f) => f.Oid === eventoId)
+        : {},
+      Passageiros: passageirosData ? JSON.parse(passageirosData) : [],
+      Dependentes: dependentesData ? JSON.parse(dependentesData) : [],
+      Passagens: passagens,
+    });
+
+    const exportFile: any = JSON.stringify({
+      Type: 'sct',
+      Version: this.appInfoService.currentVersion,
+      Congregacao: congregacao,
+      Saidas: saidasData ? JSON.parse(saidasData) : [],
+      Evento: eventosData
+        ? (<Evento[]>JSON.parse(eventosData)).find((f) => f.Oid === eventoId)
+        : {},
+      Passageiros: passageirosData ? JSON.parse(passageirosData) : [],
+      Dependentes: dependentesData ? JSON.parse(dependentesData) : [],
+      Passagens: passagens,
+    });
+    const encryptedFile = this.criptoService
+      .encryptUsingAES2560(chave, exportFile)
+      .toString();
     const d = new Date();
     this.downloadfile(
-      `${congregacao?.Nome} - ${d.getFullYear()}${this.pad(d.getMonth() + 1)}${this.pad(
-        d.getDate()
-      )}${this.pad(d.getHours())}${this.pad(d.getMinutes())}${this.pad(
-        d.getSeconds()
-      )}.txt`,
-      exportFile
+      `${congregacao?.Nome} - ${d.getFullYear()}${this.pad(
+        d.getMonth() + 1
+      )}${this.pad(d.getDate())}${this.pad(d.getHours())}${this.pad(
+        d.getMinutes()
+      )}${this.pad(d.getSeconds())}.txt`,
+      encryptedFile
     );
 
     notify(
@@ -160,7 +184,8 @@ export class AppDataService {
   }
   fileUrl: any;
   downloadfile(filename: string, content: string) {
-    const blob = new Blob([content], { type: 'application/octet-stream' });
+    var BOM = new Uint8Array([0xef, 0xbb, 0xbf]);
+    const blob = new Blob([BOM, content], { type: 'text/plain;charset=utf8' });
     let url = window.URL.createObjectURL(blob);
     const anchor = document.createElement('a');
     anchor.download = filename;

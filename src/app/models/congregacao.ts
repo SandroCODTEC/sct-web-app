@@ -1,4 +1,7 @@
+import Guid from "devextreme/core/guid";
+
 export class Congregacao {
+  Oid: string = new Guid().toString();
   Nome: string = 'Minha Congregação';
   Responsavel: string = '';
   EmailResponsavel: string = '';
@@ -51,6 +54,13 @@ export interface Passageiro {
   Documento: string;
   Celular: string;
   Dependentes: any;
+}
+export interface Dependente {
+  Oid: string;
+  Nome: string;
+  TipoDocumento: string;
+  Documento: string;
+  Celular: string;
 }
 
 export interface Backup {

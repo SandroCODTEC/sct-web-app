@@ -1,5 +1,5 @@
 <h2 class="content-block">Lista de Passagens</h2>
-<dx-toolbar class="header-toolbar">
+<dx-toolbar class="header-toolbar" *ngIf="eventos">
   <dxi-item
     location="after"
     widget="dxSelectBox"
@@ -13,7 +13,17 @@
     }"
   >
   </dxi-item>
-
+  <dxi-item
+    location="after"
+    widget="dxButton"
+    [options]="{
+      icon: 'group',
+      text: 'Importar Passageiros',
+      stylingMode: 'text',
+      onClick: importarPassageiros
+    }"
+  >
+  </dxi-item>
   <dxi-item
     location="after"
     widget="dxButton"
@@ -168,3 +178,5 @@
     ></dxo-form-item>
   </dxi-column>
 </dx-data-grid>
+
+<app-input-key (saved)="saved($event)"></app-input-key>
