@@ -12,6 +12,6 @@ export class AppInfoService {
     return new Date().getFullYear();
   }
   public get currentVersion() {
-    return "1.0.3";
+    return "1.0.4";
   }
 }

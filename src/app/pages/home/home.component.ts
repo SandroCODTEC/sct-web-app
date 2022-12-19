@@ -49,16 +49,23 @@ export class HomeComponent implements AfterViewInit {
         });
         const dias = this.passagemService.getFiltredDias();
         dias.forEach((d) => {
+          console.log(d.Value, data);
+          var diaPassagens = data.filter((f) =>
+            f.Dias ? (<any[]>f.Dias).includes(d.Value) : 0
+          );
           this.estatisticas.push({
             Name: d.Text,
-            Passagens: data.length,
-            Dependentes: totalDependentes,
+            Passagens: diaPassagens.length,
+            Dependentes: diaPassagens.reduce(
+              (s, o) => s+ (o.Dependentes ? o.Dependentes.length : 0),
+              0
+            ),
           });
         });
         this.estatisticas.push({
           Name: 'Total Geral',
-          Passagens: data.length,
-          Dependentes: totalDependentes,
+          Passagens: this.estatisticas.reduce((s, o) => s + o.Passagens, 0),
+          Dependentes: this.estatisticas.reduce((s, o) => s + o.Dependentes, 0),
         });
       });
   }
