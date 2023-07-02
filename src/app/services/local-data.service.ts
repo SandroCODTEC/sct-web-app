@@ -53,25 +53,30 @@ export class DataService {
     const store = this.getLocalDataStore(table, key);
     var dataSource = new DataSource({
       store: store,
+      paginate: false,
     });
+
     return dataSource;
   }
   getArrayDataSource(array: any, key: string = 'Oid'): DataSource {
     const store = this.getArrayDataStore(array, key);
     var dataSource = new DataSource({
       store: store,
+      paginate: false,
     });
     return dataSource;
   }
   getLocalLookUpDataSource(table: string, key: string = 'Oid') {
     var dataSource = {
       store: this.getLocalDataStore(table, key),
+      paginate: false,
     };
     return dataSource;
   }
   getArrayLookUpDataSource(array: any, key: string = 'Oid') {
     var dataSource = {
       store: this.getArrayDataStore(array, key),
+      paginate: false,
     };
     return dataSource;
   }
