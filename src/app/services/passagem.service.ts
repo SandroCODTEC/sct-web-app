@@ -26,8 +26,8 @@ export class PassagemService {
   }
   private getEventoOid(): string {
     const oid = this.dataService.valueGet('currentEvento');
-    if (!this.currentEvento) {
-      const list = <Saida[]>(
+    if (!oid) {
+      const list = <Evento[]>(
         JSON.parse(this.dataService.valueGet('dx-data-localStore-Eventos'))
       );
       if (list?.length > 0) {
