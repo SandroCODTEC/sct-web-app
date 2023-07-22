@@ -2,6 +2,7 @@
   "name": "sct-web-app",
   "version": "1.0.4",
   "scripts": {
+    "publish": "ng b --configuration=production --base-href=/sct-web-app/", 
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",

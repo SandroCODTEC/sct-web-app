@@ -11,6 +11,17 @@ export class DataService {
   constructor() {
     this.storage = window.localStorage;
   }
+  resetValue(local: string) {
+    const dependentesData = this.valueGet(local);
+    if (dependentesData === 'null') this.valueSet(local, JSON.stringify([]));
+  }
+  resetValues() {
+    this.resetValue(`dx-data-localStore-Dependentes`);
+    this.resetValue(`dx-data-localStore-Saidas`);
+    this.resetValue(`dx-data-localStore-Congregacao`);
+    this.resetValue(`dx-data-localStore-Passageiros`);
+    this.resetValue(`dx-data-localStore-Eventos`);
+  }
   valueSet(key: string, value: string): boolean {
     if (this.storage) {
       this.storage.setItem(key, value);
@@ -38,14 +49,14 @@ export class DataService {
       key: key,
       name: table,
       immediate: true,
-      flushInterval: 500
+      flushInterval: 500,
     });
     return store;
   }
   getArrayDataStore(array: any, key: string = 'Oid'): LocalStore {
     const store = new ArrayStore({
       key: key,
-      data: array
+      data: array,
     });
     return store;
   }

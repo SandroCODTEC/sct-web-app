@@ -12,6 +12,7 @@ import Guid from 'devextreme/core/guid';
 export class PassageiroComponent implements OnInit {
   dataSource: any;
   dependentes: any;
+  correntOid: string = '';
   public tipos = [
     { Value: 'CPF', Text: 'CPF' },
     { Value: 'DI', Text: 'Identidade' },
@@ -24,7 +25,8 @@ export class PassageiroComponent implements OnInit {
 
   ngOnInit(): void {}
   getDependentes(Oid: string) {
-    if (!this.dependentes) {
+    if (!this.dependentes || Oid != this.correntOid) {
+      this.correntOid = Oid;
       this.dependentes = this.getLocalDataSource('Dependentes', Oid);
     }
     return this.dependentes;
